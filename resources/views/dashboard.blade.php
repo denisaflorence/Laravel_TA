@@ -44,20 +44,18 @@
                         <h2>Laporan Piutang</h2>
                             <tr class="1">
                                 <th scope="col">Nama Pembeli</th>
-                                <th scope="col">Status</th>
+                                
                                 <th scope="col">Sisa Bayar</th>
+                                <th scope="col">Tanggal Pelunasan</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($exit as $item)
                             <tr class="4" style="background-color: #DAC1AE">
                                 <td>{{$item->nama_reseller}}</td>
-                                @if($item->status == 'Belum Lunas')
-                                <td class="bg-danger">{{$item->status}}</td>
-                                <!-- @else
-                                <td class="bg-success">{{$item->status}}</td> -->
-                                @endif
-                                <td>{{$item->belum_dibayar}}</td>
+                                
+                                <td>{{$item->total}}</td>
+                                <td>{{$item->tanggal_pelunasan}}</td>
                             </tr> 
                             @endforeach
                         </tbody>

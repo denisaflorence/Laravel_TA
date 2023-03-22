@@ -32,18 +32,12 @@ class AwalController extends Controller
             WHEN jumlah_stok = "0" THEN "Tidak Tersedia"
             ELSE "Tersedia" 
             END) AS status'))
-        ->get();
-        $reseller = Reseller::all();
-        $exit = BarangKeluar::select('*',
-        DB::raw('(CASE 
-            WHEN belum_dibayar = 0 THEN "Lunas"
-            ELSE "Belum Lunas" 
-            END) AS status'))
-        // ->addColumn('nama_reseller',function($exit){
-        //         return $exit->reseller->nama_reseller;  
-        // })
-        ->get();
-        // ->make(true);
+            ->get();
+       
+        $exit = DB::select('SELECT  r.reseller_id,r.nama_reseller, p.nama_produk, SUM(bk.belum_dibayar) AS total, bk.tanggal_pelunasan
+        FROM barang_keluar AS bk, detail_barang_keluar AS dbk, reseller r, produk p
+        WHERE bk.belum_dibayar>0 AND r.reseller_id = bk.reseller_id
+        GROUP BY r.nama_reseller');
         return view('dashboard', compact('results','exit'));
         
         
@@ -52,17 +46,11 @@ class AwalController extends Controller
 
 
     public function incoming(){
-        // echo "Halo Kamu ngakses Controller Awal pada function index";
-
         return view('barangmasuk');
-        // $incoming = BarangMasuk::all('invoice_id', 'total_harga', 'tanggal');
-        // dd($incoming);
     }
     // DATATABLE
     public function json(){
         $incoming = BarangMasuk::query('invoice_id', 'total_harga', 'tanggal');
-        // dd($results);
-        
         return DataTables::eloquent($incoming)
         ->addColumn('action', function ($incoming) {
             $button ='<div style="display: flex;  ">';
