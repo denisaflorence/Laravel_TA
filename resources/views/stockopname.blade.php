@@ -51,7 +51,6 @@
                                         <a href="manage_wisata.html" class="btn btn-small-table btn-primary ">Details</a>
                                     </td>
                                 </tr>
-
                                 <tr class="4" style="background-color: #DAC1AE">
                                     <td>Pisa</td>
                                     <td>Plance, Italy</td>

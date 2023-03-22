@@ -10,7 +10,8 @@
                 <div class="item-big-report col-md-12">
                     <table class="table-wisata table-tiketsaya table " id ="produk-table">
                         <thead>
-                            <tr class="1">
+                            <h2>Status Ketersediaan Produk</h2>
+                            <tr class="1"> 
                                 <th scope="col">Nama Produk</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Jumlah Stok</th>
@@ -40,6 +41,7 @@
                 <div class="item-big-report col-lg-12">
                     <table class="table-wisata table-tiketsaya table " id ="produk-table">
                         <thead>
+                        <h2>Laporan Piutang</h2>
                             <tr class="1">
                                 <th scope="col">Nama Pembeli</th>
                                 <th scope="col">Status</th>
@@ -58,20 +60,10 @@
                                 <td>{{$item->belum_dibayar}}</td>
                             </tr> 
                             @endforeach
-
-
                         </tbody>
                     </table>
-
-
                 </div>
-
-
-
             </div>
-
-
-
         </div>
 </div>
 @endsection

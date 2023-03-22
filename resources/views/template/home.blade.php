@@ -97,7 +97,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="/laporan/bln" style="font-size: 16px">Periodik</a>
-                        <a class="dropdown-item" href="/laporan/bln" style="font-size: 16px">Tahunan</a>
+                        <a class="dropdown-item" href="/laporan/thn" style="font-size: 16px">Tahunan</a>
                     </div>
                 </div>
                 <!-- End Of Laporan Penjualan -->
@@ -108,8 +108,8 @@
                     <i class="fa-solid fa-file-lines" style= "font-size: 24px"></i>Laporan Pembelian
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="" style="font-size: 16px">Periodik</a>
-                        <a class="dropdown-item" href="" style="font-size: 16px">Tahunan</a>
+                        <a class="dropdown-item" href="/laporan/bulan" style="font-size: 16px">Periodik</a>
+                        <a class="dropdown-item" href="/laporan/tahun" style="font-size: 16px">Tahunan</a>
                     </div>
                 </div>
                 <!-- End Of Laporan Pembelian -->
