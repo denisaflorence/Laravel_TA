@@ -183,7 +183,7 @@
                 <header>
                     <div class="row" style="display: block">
                         <div class="col">
-                                <img src="{{public_path('/assets/img/logokk.png')}}" style="width: 150px; display: block; margin-left: auto; margin-right: auto; " data-holder-rendered="true" />
+                                <img src="{{public_path('/assets/img/logokk.png')}}" style="width: 150px; display: block; margin-left: 260px; margin-right: 500px; " data-holder-rendered="true" />
                         </div>
                         <div class="col company-details text-center">
                             <div class = "text-center"><h2>Kutus - Kutus</h2></div>

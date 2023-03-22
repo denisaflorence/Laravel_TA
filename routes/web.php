@@ -62,8 +62,15 @@ Route::post('preview/laporan/keluar', 'App\Http\Controllers\BarangKeluarControll
 Route::post('/laporan/keluar', 'App\Http\Controllers\BarangKeluarController@laporan_bulan');
 Route::post('/preview/laporan/thn/cetak', 'App\Http\Controllers\BarangKeluarController@preview_laporan_tahun');
 Route::post('/laporan/thn/cetak', 'App\Http\Controllers\BarangKeluarController@laporan_tahun');
+
+// LAPORAN PENJUALAN
 Route::get('/laporanpenjualan/bln','App\Http\Controllers\BarangKeluarController@combo_box_penjualan');
 Route::post('/laporanpenjualan/bln/preview','App\Http\Controllers\BarangKeluarController@preview_laporan_penjualan_bulan');
+Route::post('/laporanpenjualan/bln/cetak','App\Http\Controllers\BarangKeluarController@cetak_laporan_penjualan_bulanan');
+Route::get('/laporanpenjualan/thn','App\Http\Controllers\BarangKeluarController@combo_box_penjualan_tahun');
+Route::post('/laporanpenjualan/thn/preview','App\Http\Controllers\BarangKeluarController@preview_laporan_penjualan_tahun');
+Route::post('/laporanpenjualan/thn/cetak','App\Http\Controllers\BarangKeluarController@cetak_laporan_penjualan_tahunan');
+
 
 
 // LAPORAN PIUTANG

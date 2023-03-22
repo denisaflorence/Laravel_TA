@@ -314,16 +314,81 @@ class BarangKeluarController extends Controller
         WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bk.nota_id = dbk.nota_id AND bk.reseller_id = r.reseller_id 
         GROUP BY bk.reseller_id');
         
-
         $total = DB::select('SELECT SUM(total) AS total_semua
         FROM (SELECT SUM(dbk.jumlah*harga_satuan) AS total
         FROM barang_keluar AS bk, detail_barang_keluar AS dbk
-        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bk.nota_id = dbk.nota_id
+        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bk.nota_id = dbk.nota_id 
         GROUP BY dbk.produk_id) a
 
         ');
 
         return view('Barang_Keluar.laporan_penjualan_bulan', compact('exit','total','monthName','month') );
     }
+    public function cetak_laporan_penjualan_bulanan(){
+        setlocale(LC_TIME, 'IND');  // or setlocale(LC_TIME, 'id_ID');
 
+        $month = $_POST['month'];
+
+
+        $monthName = date("F", mktime(0, 0, 0, $month, 10));
+
+        $exit = DB::select('SELECT r.reseller_id, r.nama_reseller, SUM(dbk.jumlah) AS jumlah, SUM(dbk.jumlah*harga_satuan) AS total
+        FROM barang_keluar AS bk, detail_barang_keluar AS dbk, reseller r
+        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bk.nota_id = dbk.nota_id AND bk.reseller_id = r.reseller_id 
+        GROUP BY bk.reseller_id');
+        
+        $total = DB::select('SELECT SUM(total) AS total_semua
+        FROM (SELECT SUM(dbk.jumlah*harga_satuan) AS total
+        FROM barang_keluar AS bk, detail_barang_keluar AS dbk
+        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bk.nota_id = dbk.nota_id 
+        GROUP BY dbk.produk_id) a
+
+        ');
+
+        ini_set('max_execution_time', 300);
+        $pdf = PDF::loadview('Barang_Keluar.laporan_penjualan_bulan_cetak', compact('exit','total','monthName','month') );
+        return $pdf->stream();
+    }
+    public function combo_box_penjualan_tahun(){
+        $tahun = DB::select('SELECT EXTRACT(YEAR FROM tanggal) AS year
+        FROM barang_keluar
+        GROUP BY year
+        ');
+        return view('Barang_Keluar.laporanpenjualantahun',compact('tahun'));
+    }
+    public function preview_laporan_penjualan_tahun(){
+        $year = $_POST['year'];
+        $exit = DB::select('SELECT r.reseller_id, r.nama_reseller, SUM(dbk.jumlah) AS jumlah, SUM(dbk.jumlah*harga_satuan) AS total
+        FROM barang_keluar AS bk, detail_barang_keluar AS dbk, reseller r
+        WHERE EXTRACT(YEAR FROM tanggal) = '.$year.' AND bk.nota_id = dbk.nota_id AND bk.reseller_id = r.reseller_id 
+        GROUP BY bk.reseller_id');
+        
+        $total = DB::select('SELECT SUM(total) AS total_semua
+        FROM (SELECT SUM(dbk.jumlah*harga_satuan) AS total
+        FROM barang_keluar AS bk, detail_barang_keluar AS dbk
+        WHERE EXTRACT(YEAR FROM tanggal) = '.$year.' AND bk.nota_id = dbk.nota_id
+        GROUP BY dbk.produk_id) a
+        ');
+      
+
+        return view('Barang_Keluar.laporan_penjualan_tahunan', compact('exit','total','year') );
+    }
+    public function cetak_laporan_penjualan_tahunan(){
+        $year = $_POST['year'];
+        $exit = DB::select('SELECT r.reseller_id, r.nama_reseller, SUM(dbk.jumlah) AS jumlah, SUM(dbk.jumlah*harga_satuan) AS total
+        FROM barang_keluar AS bk, detail_barang_keluar AS dbk, reseller r
+        WHERE EXTRACT(YEAR FROM tanggal) = '.$year.' AND bk.nota_id = dbk.nota_id AND bk.reseller_id = r.reseller_id 
+        GROUP BY bk.reseller_id');
+        
+        $total = DB::select('SELECT SUM(total) AS total_semua
+        FROM (SELECT SUM(dbk.jumlah*harga_satuan) AS total
+        FROM barang_keluar AS bk, detail_barang_keluar AS dbk
+        WHERE EXTRACT(YEAR FROM tanggal) = '.$year.' AND bk.nota_id = dbk.nota_id
+        GROUP BY dbk.produk_id) a
+        ');
+
+        ini_set('max_execution_time', 300);
+        $pdf = PDF::loadview('Barang_Keluar.laporan_penjualan_tahunan_cetak', compact('exit','total','year') );
+        return $pdf->stream();
+    }
 }

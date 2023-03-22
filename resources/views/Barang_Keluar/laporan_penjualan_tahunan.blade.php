@@ -201,16 +201,16 @@
                 </div>
             </div>
         </header>
-        <form action="/laporanpenjualan/bln/cetak" method="POST">
+        <form action="/laporanpenjualan/thn/cetak" method="POST">
             @csrf
             <main>
                 <div class="container">
                     <div class="text-center" style="margin-bottom:20px;">
                         <center>
-                            <h2>Laporan Penjualan Bulan {{$monthName}}</h2>
+                            <h2>Laporan Penjualan Tahun {{$year}}</h2>
                         </center>
                     </div>
-                    <input type="hidden" name="month" value={{$month}}>
+                    <input type="hidden" name="year" value={{$year}}>
                 </div>
                 <table cellspacing="0" cellpadding="0">
                     <thead>
