@@ -205,7 +205,6 @@
         for(var i = 0, len = arr.length; i < len; i++){
             total += arr[i] << 0;
         }
-        
         console.log(total);
         document.getElementById('total_seluruh').value = total;
     }

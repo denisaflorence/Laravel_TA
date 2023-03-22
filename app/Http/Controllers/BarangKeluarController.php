@@ -277,5 +277,24 @@ class BarangKeluarController extends Controller
 
     }
 
+    public function preview_laporan_piutang(){
+        // $year = $_POST['year'];
+        $exit = DB::select('SELECT  r.reseller_id,r.nama_reseller, p.nama_produk, SUM(bk.belum_dibayar) AS total, bk.tanggal_pelunasan
+        FROM barang_keluar AS bk, detail_barang_keluar AS dbk, reseller r, produk p
+        WHERE bk.belum_dibayar>0 AND r.reseller_id = bk.reseller_id
+        GROUP BY r.nama_reseller');
+        return view('Piutang.laporanpiutang', compact('exit') );
+    }
+    public function laporan_piutang(){
+        $exit = DB::select('SELECT  r.reseller_id,r.nama_reseller, p.nama_produk, SUM(bk.belum_dibayar) AS total, bk.tanggal_pelunasan
+        FROM barang_keluar AS bk, detail_barang_keluar AS dbk, reseller r, produk p
+        WHERE bk.belum_dibayar>0 AND r.reseller_id = bk.reseller_id
+        GROUP BY r.nama_reseller');
+        // dd($res,$total);
+
+        ini_set('max_execution_time', 300);
+        $pdf = PDF::loadview('Piutang.laporan_piutang_pdf', compact('exit') );
+        return $pdf->stream();
+    }
 
 }

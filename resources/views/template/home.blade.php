@@ -117,7 +117,7 @@
                 <!-- End Of Laporan Pembelian -->
 
                 <!-- Laporan Piutang -->
-                <a href="">
+                <a href="/laporanpiutang">
                     <li style="color: black">
                         <i class="fa-solid fa-file-invoice" style= "font-size: 24px;padding-top:20px"></i>
                         Laporan Piutang

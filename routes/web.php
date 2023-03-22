@@ -64,7 +64,10 @@ Route::post('/preview/laporan/thn/cetak', 'App\Http\Controllers\BarangKeluarCont
 Route::post('/laporan/thn/cetak', 'App\Http\Controllers\BarangKeluarController@laporan_tahun');
 
 
+// LAPORAN PIUTANG
 
+Route::get('/laporanpiutang', 'App\Http\Controllers\BarangKeluarController@preview_laporan_piutang');
+Route::post('/laporanpiutang/cetak', 'App\Http\Controllers\BarangKeluarController@laporan_piutang');
 
 
 // PRODUK
