@@ -296,5 +296,34 @@ class BarangKeluarController extends Controller
         $pdf = PDF::loadview('Piutang.laporan_piutang_pdf', compact('exit') );
         return $pdf->stream();
     }
+    public function combo_box_penjualan(){
+        
+        return view('Barang_Keluar.laporanpenjualan');
+    }
+    public function preview_laporan_penjualan_bulan(){
+        setlocale(LC_TIME, 'IND');  // or setlocale(LC_TIME, 'id_ID');
+
+        $month = $_POST['month'];
+
+
+        $monthName = date("F", mktime(0, 0, 0, $month, 10));
+
+        // dd($monthName);
+        $exit = DB::select('SELECT r.reseller_id, r.nama_reseller, SUM(dbk.jumlah) AS jumlah, SUM(dbk.jumlah*harga_satuan) AS total
+        FROM barang_keluar AS bk, detail_barang_keluar AS dbk, reseller r
+        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bk.nota_id = dbk.nota_id AND bk.reseller_id = r.reseller_id 
+        GROUP BY bk.reseller_id');
+        
+
+        $total = DB::select('SELECT SUM(total) AS total_semua
+        FROM (SELECT SUM(dbk.jumlah*harga_satuan) AS total
+        FROM barang_keluar AS bk, detail_barang_keluar AS dbk
+        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bk.nota_id = dbk.nota_id
+        GROUP BY dbk.produk_id) a
+
+        ');
+
+        return view('Barang_Keluar.laporan_penjualan_bulan', compact('exit','total','monthName','month') );
+    }
 
 }

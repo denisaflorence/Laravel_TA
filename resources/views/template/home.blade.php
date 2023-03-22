@@ -98,7 +98,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="/laporan/bln" style="font-size: 16px">Produk Periodik</a>
                         <a class="dropdown-item" href="/laporan/thn" style="font-size: 16px">Produk Tahunan</a>
-                        <a class="dropdown-item" href="" style="font-size: 16px">Periodik</a>
+                        <a class="dropdown-item" href="/laporanpenjualan/bln" style="font-size: 16px">Periodik</a>
                         <a class="dropdown-item" href="" style="font-size: 16px">Tahunan</a>
                     </div>
                 </div>
