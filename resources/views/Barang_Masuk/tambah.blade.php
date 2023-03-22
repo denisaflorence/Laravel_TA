@@ -79,7 +79,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3  mb-3" >
-                                <input type="text" class="form-control mt-2" name="total_harga_pembelian[]" readonly>
+                                <input type="text" class="form-control mt-2" name="total_harga_pembelian[]" >
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                     </div>
                     <div class="col align-self-end  ">
                         <div class="col-md-3 offset-md-8"> 
-                            <input  class="form-control" type="text" id="total_seluruh" name="total_seluruh" readonly>
+                            <input  class="form-control" type="text" id="total_seluruh" name="total_seluruh">
                         </div>
                     </div>
                 </div>
