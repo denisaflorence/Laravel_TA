@@ -70,11 +70,12 @@
                                 <input type="text" class="form-control mt-2" name="jumlah[]">
                             </div>
                             <div class="col-md-3" >
-                                <select class="form-control mt-2 ab-t-rpt-2" name="harga_satuan[]" readonly>
-                                    <option value="">--Harga Produk--</option>
+                                <!-- <select class="form-control mt-2 ab-t-rpt-2" name="harga_satuan[]" > -->
+                                <input type="text" class="form-control mt-2" name="harga_satuan[]">
+                                    <!-- <option value="">--Harga Produk--</option>
                                     @foreach($produk as $items)
                                     <option value="{{ $items->harga_jual }}">{{ $items->harga_jual }}</option>
-                                    @endforeach
+                                    @endforeach -->
                                 </select>
                             </div>
                             <div class="col-md-3  mb-3" >
