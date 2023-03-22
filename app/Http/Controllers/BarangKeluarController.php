@@ -21,7 +21,6 @@ use Carbon\Carbon;
 
 class BarangKeluarController extends Controller
 {
-    //DEN TARUH BLADENYA DI SINI
     public function addexit(){
         $reseller = Reseller::all();
         $produk = Produk::all();
@@ -31,11 +30,6 @@ class BarangKeluarController extends Controller
         // $admin = Admin::where('admin_id',$id)->first();
         $nota = DB::select('CALL ID_barangkeluar');
         $grade = Grade::all();
-        // $nota = BarangKeluar::hydrate($query);
-        // dd($nota);
-        // $nota = collect($query);
-        // dd($reseller,$produk,$admin);
-        // dd($reseller->grade->jenis_grade);
         return view('Barang_Keluar.tambah', compact('reseller','produk','nota','grade'));
     }
 

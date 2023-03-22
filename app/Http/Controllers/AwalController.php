@@ -33,23 +33,22 @@ class AwalController extends Controller
             ELSE "Tersedia" 
             END) AS status'))
         ->get();
-        return view('dashboard', compact('results'));
-     
+        $reseller = Reseller::all();
+        $exit = BarangKeluar::select('*',
+        DB::raw('(CASE 
+            WHEN belum_dibayar = 0 THEN "Lunas"
+            ELSE "Belum Lunas" 
+            END) AS status'))
+        // ->addColumn('nama_reseller',function($exit){
+        //         return $exit->reseller->nama_reseller;  
+        // })
+        ->get();
+        // ->make(true);
+        return view('dashboard', compact('results','exit'));
+        
+        
     }
 
-    // DATATABLE
-    // public function dashboard(){
-    //     $results = Produk::select('*',
-    //     \DB::raw('(CASE 
-    //         WHEN jumlah_stok <= "200" THEN "Stok Menipis"
-    //         WHEN jumlah_stok = "0" THEN "Tidak Tersedia"
-    //         ELSE "Tersedia" 
-    //         END) AS status'))
-    //     ->get();
-    //     // dd($results);
-                        
-    //     return Datatables::of($results)->make(true);
-    // }
 
 
     public function incoming(){
@@ -123,8 +122,6 @@ class AwalController extends Controller
 
 
     public function produk(){
-
-
         return view('produk');
         // $incoming = BarangMasuk::all('invoice_id', 'total_harga', 'tanggal');
         // dd($incoming);
@@ -182,8 +179,6 @@ class AwalController extends Controller
     // DATATABLE
     public function sopname_json(){
         $sopname = StockOpname::query();
-        // dd($results);
-        
         return DataTables::eloquent($sopname)
         // ->addColumn('action', function ($sopname) {
         //     $button ='<div style="display: flex;  ">';

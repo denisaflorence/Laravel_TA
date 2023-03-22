@@ -41,23 +41,21 @@
                     <table class="table-wisata table-tiketsaya table " id ="produk-table">
                         <thead>
                             <tr class="1">
-                                <th scope="col">Nama Produk</th>
+                                <th scope="col">Nama Pembeli</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Jumlah Stok</th>
+                                <th scope="col">Sisa Bayar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($results as $item)
+                            @foreach($exit as $item)
                             <tr class="4" style="background-color: #DAC1AE">
-                                <td>{{$item->nama_produk}}</td>
-                                @if($item->status == 'Tidak Tersedia')
+                                <td>{{$item->nama_reseller}}</td>
+                                @if($item->status == 'Belum Lunas')
                                 <td class="bg-danger">{{$item->status}}</td>
-                                @elseif($item->status == 'Stok Menipis')
-                                <td class="bg-warning">{{$item->status}}</td>
-                                @else
-                                <td class="bg-success">{{$item->status}}</td>
+                                <!-- @else
+                                <td class="bg-success">{{$item->status}}</td> -->
                                 @endif
-                                <td>{{$item->jumlah_stok}}</td>
+                                <td>{{$item->belum_dibayar}}</td>
                             </tr> 
                             @endforeach
 
