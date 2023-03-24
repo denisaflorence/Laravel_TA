@@ -43,7 +43,7 @@
                         <input type="text" class="form-control" id="fullName" value="{{$nota[0]->ID}}" name="nota_id"
                             readonly>
                     </div>
-                    
+
                     <div class="col mb-4">
                         <label for="phone" class='font-weight-bold'>Tanggal</label>
                         <input type="text" class="form-control datepicker" id="from-datepicker"
@@ -89,7 +89,7 @@
                                 <select class="form-control mt-2 ab-t-rpt-2" name="harga_satuan[]" readonly>
                                     <option value="">--Harga Produk--</option>
                                     @foreach($produk as $items)
-                                    <option value="{{ $items->harga_jual }}">{{ $items->harga_jual }}</option>
+                                    <option value="{{ $items->harga_jual }}">Rp. {{ $items->harga_jual }} ,00</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -137,21 +137,27 @@
                 @endforeach
             </select>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <input type="text" class="form-control mt-2" name="jumlah[]">
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <select class="form-control mt-2 ab-t-rpt-2" name="harga_satuan[]" readonly>
+                <option value="">--Harga Produk--</option>
+                @foreach($produk as $items)
+                <option value="{{ $items->harga_jual }}">Rp. {{ $items->harga_jual }} ,00</option>
+                @endforeach
+            </select>
+            {{-- <select class="form-control mt-2 ab-t-rpt-2" name="harga_satuan[]" readonly>
                 <option value="">--Harga Produk--</option>
                 @foreach($produk as $items)
                 <option value="{{ $items->harga_jual }}">@currency($items->harga_jual)</option>
                 @endforeach
-            </select>
+            </select> --}}
         </div>
 
-        <div class="col-md-2">
+        {{-- <div class="col-md-2">
             <input type="text" class="form-control mt-2" name="harga_diskon[]" readonly>
-        </div>
+        </div> --}}
         <div class="col-md-2">
             <input type="text" class="form-control mt-2" name="total_harga_penjualan[]" readonly>
         </div>
@@ -210,10 +216,10 @@
         // nanti diubah soalnya indexnya turun kalau ditambah option "--Nama Produk--"
         //document.getElementById("harga_produk").selectedIndex = document.getElementById("produk").selectedIndex;
 
-        
+
 
         calculateValue(gradeId, produkId);
-        
+
 
     });
 

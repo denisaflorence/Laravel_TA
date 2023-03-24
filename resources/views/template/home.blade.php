@@ -18,7 +18,7 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm " style="position: fixed; overflow:hidden; width:100%; height:8%; z-index:9999; background-color:#b28e6b">
+    <nav class="navbar navbar-expand-sm " style="overflow:hidden; width:100%; height:8%; z-index:9999; background-color:#b28e6b">
         <a class="navbar-brand" href=""><img src="/assets/img/logo.png" height="50" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>

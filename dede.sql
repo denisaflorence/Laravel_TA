@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Mar 21, 2023 at 12:14 PM
--- Server version: 5.7.33
--- PHP Version: 7.4.19
+-- Host: localhost
+-- Waktu pembuatan: 24 Mar 2023 pada 07.07
+-- Versi server: 10.4.21-MariaDB
+-- Versi PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,12 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_isb19_009`
+-- Database: `dede`
 --
 
 DELIMITER $$
 --
--- Procedures
+-- Prosedur
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ID_barangkeluar` ()  NO SQL BEGIN
 SET @cek = (
@@ -90,9 +90,9 @@ SET @nol = (
 SELECT CONCAT("SO",RIGHT(YEAR(CURDATE()),2), @nol, @num) AS `ID`;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_barangkeluar` (IN `id_nota` VARCHAR(8), IN `id_admin` VARCHAR(15), IN `tanggal` DATE, IN `id_res` VARCHAR(6), IN `total` INT(12), IN `jum_kut` INT(5))  NO SQL INSERT INTO `barang_keluar`(`nota_id`, `admin_id`, `tanggal`, `reseller_id`, `total_harga_penjualan`, `sudah_dibayar`, `belum_dibayar`, `jumlah_kutus`) VALUES (id_nota, id_admin, tanggal, id_res, total,0,total,jum_kut)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_barangkeluar` (IN `id_nota` VARCHAR(8), IN `id_admin` VARCHAR(15), IN `tanggal` DATE, IN `id_res` VARCHAR(6), IN `total` INT(12), IN `jum_kut` INT(5))  NO SQL INSERT INTO `barang_keluar`(`nota_id`, `admin_id`, `tanggal`, `reseller_id`, `total_harga_penjualan`, `sudah_dibayar`, `belum_dibayar`,`tanggal_pelunasan`, `jumlah_kutus`) VALUES (id_nota, id_admin, tanggal, id_res, total,0,total,0,jum_kut)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_barangmasuk` (IN `id_invo` VARCHAR(7), IN `id_admin` VARCHAR(15), IN `tanggal` DATE, IN `total` INT(12))  NO SQL INSERT INTO `barang_masuk`(`invoice_id`, `admin_id`, `tanggal`, `total_harga`, `invoice_status`) VALUES (id_invo, id_admin, tanggal, total, 1)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_barangmasuk` (IN `id_invo` VARCHAR(7), IN `tanggal` DATE, IN `total` INT(12), IN `admin_id` VARCHAR(12))  NO SQL INSERT INTO `barang_masuk`(`invoice_id`,  `tanggal`, `total_harga`,`admin_id`, `invoice_status`) VALUES (id_invo, tanggal, total,admin_id, 1)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_detbarangkeluar` (IN `id_nota` VARCHAR(8), IN `id_prod` VARCHAR(4), IN `jum` INT(5), IN `harga` INT(6))  NO SQL INSERT INTO `detail_barang_keluar`(`nota_id`, `produk_id`, `jumlah`, `satuan_id`, `harga_satuan`) VALUES (id_nota, id_prod, jum, 'pcs', harga)$$
 
@@ -117,7 +117,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Struktur dari tabel `admin`
 --
 
 CREATE TABLE `admin` (
@@ -129,14 +129,14 @@ CREATE TABLE `admin` (
   `nomor_telepon` varchar(13) NOT NULL,
   `email` varchar(50) NOT NULL,
   `akses_id` tinyint(1) NOT NULL,
-  `status_del` tinyint(1) NOT NULL DEFAULT '1',
+  `status_del` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `admin`
+-- Dumping data untuk tabel `admin`
 --
 
 INSERT INTO `admin` (`admin_id`, `password`, `nama_admin`, `gaji`, `alamat`, `nomor_telepon`, `email`, `akses_id`, `status_del`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -145,7 +145,7 @@ INSERT INTO `admin` (`admin_id`, `password`, `nama_admin`, `gaji`, `alamat`, `no
 -- --------------------------------------------------------
 
 --
--- Table structure for table `barang_keluar`
+-- Struktur dari tabel `barang_keluar`
 --
 
 CREATE TABLE `barang_keluar` (
@@ -156,6 +156,7 @@ CREATE TABLE `barang_keluar` (
   `total_harga_penjualan` int(12) NOT NULL,
   `sudah_dibayar` int(12) NOT NULL,
   `belum_dibayar` int(12) NOT NULL,
+  `tanggal_pelunasan` date NOT NULL,
   `jumlah_kutus` int(5) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -163,60 +164,60 @@ CREATE TABLE `barang_keluar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `barang_keluar`
+-- Dumping data untuk tabel `barang_keluar`
 --
 
-INSERT INTO `barang_keluar` (`nota_id`, `admin_id`, `tanggal`, `reseller_id`, `total_harga_penjualan`, `sudah_dibayar`, `belum_dibayar`, `jumlah_kutus`, `created_at`, `deleted_at`, `updated_at`) VALUES
-('J2101002', 'clara_1', '2021-01-04', 'RL002', 505000, 505000, 0, 2, NULL, NULL, NULL),
-('J2101003', 'clara_1', '2021-01-04', 'RL003', 250000, 250000, 0, 0, NULL, NULL, NULL),
-('J2101004', 'clara_1', '2021-01-05', 'RL004', 2300000, 2300000, 0, 10, NULL, NULL, NULL),
-('J2101005', 'clara_1', '2021-01-05', 'RL005', 505000, 505000, 0, 2, NULL, NULL, NULL),
-('J2101006', 'sewunah12', '2021-01-06', 'RL006', 450000, 450000, 0, 0, NULL, NULL, NULL),
-('J2101007', 'sewunah12', '2021-01-06', 'RL007', 430000, 430000, 0, 1, NULL, NULL, NULL),
-('J2101008', 'sewunah12', '2021-01-07', 'RL001', 960000, 960000, 0, 2, NULL, NULL, NULL),
-('J2101009', 'sewunah12', '2021-04-07', 'RL002', 120000, 120000, 0, 0, NULL, NULL, NULL),
-('J2101010', 'sewunah12', '2021-04-10', 'RL003', 1040000, 1040000, 0, 0, NULL, NULL, '2021-05-22 08:52:41'),
-('J2101011', 'sewunah12', '2021-04-10', 'RL004', 1150000, 1150000, 0, 0, NULL, NULL, '2022-08-02 23:12:50'),
-('J2101012', 'sewunah12', '2021-01-12', 'RL005', 2040000, 2000000, 40000, 8, NULL, NULL, NULL),
-('J2101013', 'sewunah12', '2021-04-15', 'RL006', 320000, 320000, 0, 0, NULL, NULL, NULL),
-('J2101014', 'juleha33', '2021-01-15', 'RL007', 2500000, 2500000, 0, 10, NULL, NULL, NULL),
-('J2101015', 'juleha33', '2021-01-18', 'RL008', 1250000, 1000000, 250000, 0, NULL, NULL, NULL),
-('J2101016', 'juleha33', '2021-01-19', 'RL001', 700000, 500000, 200000, 0, NULL, NULL, NULL),
-('J2101017', 'juleha33', '2021-01-19', 'RL003', 5000000, 5000000, 0, 20, NULL, NULL, NULL),
-('J2101018', 'juleha33', '2021-04-20', 'RL003', 11200000, 10000000, 1200000, 40, NULL, NULL, NULL),
-('J2101019', 'juleha33', '2021-04-20', 'RL004', 1200000, 1200000, 0, 0, NULL, NULL, NULL),
-('J2101020', 'juleha33', '2021-01-21', 'RL005', 1300000, 1000000, 300000, 5, NULL, NULL, NULL),
-('J2101021', 'juleha33', '2021-04-21', 'RL008', 1300000, 1300000, 0, 5, NULL, NULL, NULL),
-('J2101022', 'juleha33', '2021-04-22', 'RL001', 2500000, 2500000, 0, 0, NULL, NULL, NULL),
-('J2101023', 'juleha33', '2021-04-22', 'RL002', 2500000, 2000000, 500000, 0, NULL, NULL, NULL),
-('J2101024', 'juleha33', '2021-04-25', 'RL006', 960000, 960000, 0, 2, NULL, NULL, NULL),
-('J2101025', 'juleha33', '2021-04-25', 'RL007', 960000, 900000, 60000, 2, NULL, NULL, NULL),
-('J2101026', 'clara_1', '2021-04-28', 'RL001', 1300000, 0, 1300000, 5, NULL, NULL, NULL),
-('J2101027', 'sewunah12', '2021-04-29', 'RL002', 1300000, 1000000, 300000, 5, NULL, NULL, NULL),
-('J2105001', 'Clara_1', '2021-05-05', 'RL004', 715000, 0, 715000, 0, NULL, NULL, NULL),
-('J2105002', 'Clara_1', '2021-05-05', 'RL002', 1980000, 0, 1980000, 0, NULL, NULL, NULL),
-('J2105003', 'Clara_1', '2021-06-05', 'RL007', 685000, 0, 685000, 0, NULL, NULL, NULL),
-('J2105004', 'owner', '2021-10-05', 'RL007', 220000, 0, 220000, 0, NULL, NULL, NULL),
-('J2105005', 'owner', '2021-10-05', 'RL007', 190000, 0, 190000, 0, NULL, NULL, NULL),
-('J2105006', 'owner', '2021-10-05', 'RL007', 410000, 0, 410000, 0, NULL, NULL, NULL),
-('J2105007', 'owner', '2021-10-05', 'RL007', 452000, 452000, 0, 0, NULL, '2021-05-17 01:55:51', '2021-05-17 01:55:51'),
-('J2105008', 'owner', '2021-10-05', 'RL005', 524000, 0, 524000, 0, NULL, '2021-05-17 01:54:49', '2021-05-17 01:54:49'),
-('J2105009', 'owner', '2021-05-17', 'RL001', 220000, 0, 220000, 0, NULL, NULL, '2021-05-17 01:54:32'),
-('J2105010', 'owner', '2021-05-22', 'RL007', 1760000, 1760000, 0, 0, NULL, NULL, '2021-05-22 08:52:13'),
-('J2105011', 'owner', '2021-05-28', 'RL011', 1628000, 1628000, 0, 0, NULL, NULL, '2021-05-27 22:55:55'),
-('J2105012', 'owner', '2021-05-31', 'RL008', 133000000, 0, 133000000, 700, NULL, NULL, NULL),
-('J2105013', 'owner', '2021-05-31', 'RL003', 133190000, 0, 133190000, 701, NULL, NULL, NULL),
-('J2208001', 'hai', '2022-08-03', 'RL004', 6068000, 0, 6068000, 0, NULL, NULL, '2022-08-02 21:50:44'),
-('J2208002', 'hai', '2022-08-03', 'RL011', 1280000, 0, 1280000, 0, NULL, NULL, NULL),
-('J2303001', 'hai', '2023-03-21', 'RL001', 4180000, 0, 4180000, 22, NULL, NULL, NULL),
-('J2303002', 'hai', '2023-03-21', 'RL011', 2147483647, 0, 2147483647, 0, NULL, NULL, NULL),
-('J2303003', 'hai', '2023-03-21', 'RL001', 39960000, 0, 39960000, 0, NULL, NULL, NULL),
-('J2303004', 'owner', '2024-03-07', 'RL001', 1900000, 0, 1900000, 10, NULL, NULL, NULL);
+INSERT INTO `barang_keluar` (`nota_id`, `admin_id`, `tanggal`, `reseller_id`, `total_harga_penjualan`, `sudah_dibayar`, `belum_dibayar`, `tanggal_pelunasan`, `jumlah_kutus`, `created_at`, `deleted_at`, `updated_at`) VALUES
+('J2101002', 'clara_1', '2021-01-04', 'RL002', 505000, 505000, 0, '0000-00-00', 2, NULL, NULL, NULL),
+('J2101003', 'clara_1', '2021-01-04', 'RL003', 250000, 250000, 0, '0000-00-00', 0, NULL, NULL, NULL),
+('J2101004', 'clara_1', '2021-01-05', 'RL004', 2300000, 2300000, 0, '0000-00-00', 10, NULL, NULL, NULL),
+('J2101006', 'sewunah12', '2021-01-06', 'RL006', 450000, 450000, 0, '0000-00-00', 0, NULL, NULL, NULL),
+('J2101007', 'sewunah12', '2021-01-06', 'RL007', 430000, 430000, 0, '0000-00-00', 1, NULL, NULL, NULL),
+('J2101008', 'sewunah12', '2021-01-07', 'RL001', 960000, 960000, 0, '0000-00-00', 2, NULL, NULL, NULL),
+('J2101009', 'sewunah12', '2021-04-07', 'RL002', 120000, 120000, 0, '0000-00-00', 0, NULL, NULL, NULL),
+('J2101010', 'sewunah12', '2021-04-10', 'RL003', 1040000, 1040000, 0, '0000-00-00', 0, NULL, NULL, '2021-05-22 08:52:41'),
+('J2101011', 'sewunah12', '2021-04-10', 'RL004', 1150000, 1150000, 0, '0000-00-00', 0, NULL, NULL, '2022-08-02 23:12:50'),
+('J2101013', 'sewunah12', '2021-04-15', 'RL006', 320000, 320000, 0, '0000-00-00', 0, NULL, NULL, NULL),
+('J2101014', 'juleha33', '2021-01-15', 'RL007', 2500000, 2500000, 0, '0000-00-00', 10, NULL, NULL, NULL),
+('J2101015', 'juleha33', '2021-01-18', 'RL008', 1250000, 1250000, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 06:02:46'),
+('J2101016', 'juleha33', '2021-01-19', 'RL001', 700000, 700000, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 06:02:59'),
+('J2101017', 'juleha33', '2021-01-19', 'RL003', 5000000, 5000000, 0, '0000-00-00', 20, NULL, NULL, NULL),
+('J2101018', 'juleha33', '2021-04-20', 'RL003', 11200000, 11200000, 0, '2023-03-22', 40, NULL, NULL, '2023-03-22 06:03:26'),
+('J2101019', 'juleha33', '2021-04-20', 'RL004', 1200000, 1200000, 0, '0000-00-00', 0, NULL, NULL, NULL),
+('J2101021', 'juleha33', '2021-04-21', 'RL008', 1300000, 1300000, 0, '0000-00-00', 5, NULL, NULL, NULL),
+('J2101022', 'juleha33', '2021-04-22', 'RL001', 2500000, 2500000, 0, '0000-00-00', 0, NULL, NULL, NULL),
+('J2101023', 'juleha33', '2021-04-22', 'RL002', 2500000, 2500000, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 06:03:49'),
+('J2101024', 'juleha33', '2021-04-25', 'RL006', 960000, 960000, 0, '0000-00-00', 2, NULL, NULL, NULL),
+('J2101025', 'juleha33', '2021-04-25', 'RL007', 960000, 960000, 0, '2023-03-22', 2, NULL, NULL, '2023-03-22 06:04:12'),
+('J2101026', 'clara_1', '2021-04-28', 'RL001', 1300000, 1300000, 0, '2023-03-22', 5, NULL, NULL, '2023-03-22 06:00:47'),
+('J2101027', 'sewunah12', '2021-04-29', 'RL002', 1300000, 1300000, 0, '2023-03-22', 5, NULL, NULL, '2023-03-22 06:04:25'),
+('J2105001', 'Clara_1', '2021-05-05', 'RL004', 715000, 715000, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 05:58:36'),
+('J2105002', 'Clara_1', '2021-05-05', 'RL002', 1980000, 1980000, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 05:58:20'),
+('J2105003', 'Clara_1', '2021-06-05', 'RL007', 685000, 685000, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 05:58:04'),
+('J2105004', 'owner', '2021-10-05', 'RL007', 220000, 220000, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 05:57:43'),
+('J2105005', 'owner', '2021-10-05', 'RL007', 190000, 190000, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 05:52:51'),
+('J2105006', 'owner', '2021-10-05', 'RL007', 410000, 410000, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 05:45:58'),
+('J2105007', 'owner', '2021-10-05', 'RL007', 452000, 452000, 0, '0000-00-00', 0, NULL, '2021-05-17 01:55:51', '2021-05-17 01:55:51'),
+('J2105009', 'owner', '2021-05-17', 'RL001', 220000, 220000, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 05:45:20'),
+('J2105010', 'owner', '2021-05-22', 'RL007', 1760000, 1760000, 0, '0000-00-00', 0, NULL, NULL, '2021-05-22 08:52:13'),
+('J2105011', 'owner', '2021-05-28', 'RL011', 1628000, 1628000, 0, '0000-00-00', 0, NULL, NULL, '2021-05-27 22:55:55'),
+('J2105012', 'owner', '2021-05-31', 'RL008', 133000000, 133000000, 0, '2023-03-22', 700, NULL, NULL, '2023-03-22 05:44:48'),
+('J2105013', 'owner', '2021-05-31', 'RL003', 133190000, 133190000, 0, '2023-03-22', 701, NULL, NULL, '2023-03-22 06:04:42'),
+('J2208001', 'hai', '2022-08-03', 'RL004', 6068000, 0, 6068000, '2023-05-23', 0, NULL, NULL, '2023-03-22 05:43:48'),
+('J2208002', 'hai', '2022-08-03', 'RL011', 1280000, 1280000, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 05:43:25'),
+('J2303001', 'hai', '2023-03-21', 'RL001', 4180000, 4180000, 0, '2023-03-22', 22, NULL, NULL, '2023-03-22 05:42:05'),
+('J2303002', 'hai', '2023-03-21', 'RL011', 2147483647, 2147483647, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 05:41:50'),
+('J2303003', 'hai', '2023-03-21', 'RL001', 39960000, 39960000, 0, '2023-03-22', 0, NULL, NULL, '2023-03-22 05:45:27'),
+('J2303004', 'owner', '2024-03-07', 'RL001', 1900000, 0, 1900000, '2023-04-30', 10, NULL, '2023-03-22 06:04:48', '2023-03-22 06:04:48'),
+('J2303005', 'owner', '2023-03-21', 'RL012', 1900000, 1900000, 0, '2023-03-22', 10, NULL, NULL, '2023-03-22 05:39:35'),
+('J2303006', 'owner', '2023-03-22', 'RL011', 17000000, 17000000, 0, '2023-03-22', 100, NULL, NULL, '2023-03-22 05:39:04'),
+('J2303007', 'owner', '2023-03-22', 'RL012', 1900000, 100000, 1800000, '2023-03-31', 10, NULL, NULL, '2023-03-22 05:33:07'),
+('J2303008', 'owner', '2023-03-22', 'RL009', 2300000, 100000, 2200000, '2023-04-20', 10, NULL, NULL, '2023-03-22 06:09:32');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `barang_masuk`
+-- Struktur dari tabel `barang_masuk`
 --
 
 CREATE TABLE `barang_masuk` (
@@ -225,11 +226,11 @@ CREATE TABLE `barang_masuk` (
   `tanggal` date NOT NULL,
   `total_harga` int(12) NOT NULL,
   `invoice_status` tinyint(1) NOT NULL,
-  `status_del` tinyint(1) NOT NULL DEFAULT '1'
+  `status_del` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `barang_masuk`
+-- Dumping data untuk tabel `barang_masuk`
 --
 
 INSERT INTO `barang_masuk` (`invoice_id`, `admin_id`, `tanggal`, `total_harga`, `invoice_status`, `status_del`) VALUES
@@ -264,12 +265,15 @@ INSERT INTO `barang_masuk` (`invoice_id`, `admin_id`, `tanggal`, `total_harga`, 
 ('B210524', 'owner', '2021-05-31', 2315000, 1, 1),
 ('B210525', 'owner', '2021-05-31', 161000000, 1, 1),
 ('B210526', 'owner', '2021-05-31', 250000000, 1, 1),
-('B220801', 'hai', '2022-08-03', 161230000, 1, 1);
+('B220801', 'hai', '2022-08-03', 161230000, 1, 1),
+('B230301', 'owner', '0000-00-00', 2023, 1, 1),
+('B230302', 'owner', '0000-00-00', 2023, 1, 1),
+('B230303', '2300000', '0000-00-00', 2023, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detail_barang_keluar`
+-- Struktur dari tabel `detail_barang_keluar`
 --
 
 CREATE TABLE `detail_barang_keluar` (
@@ -283,7 +287,7 @@ CREATE TABLE `detail_barang_keluar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `detail_barang_keluar`
+-- Dumping data untuk tabel `detail_barang_keluar`
 --
 
 INSERT INTO `detail_barang_keluar` (`nota_id`, `produk_id`, `jumlah`, `satuan_id`, `harga_satuan`, `deleted_at`, `updated_at`) VALUES
@@ -376,10 +380,14 @@ INSERT INTO `detail_barang_keluar` (`nota_id`, `produk_id`, `jumlah`, `satuan_id
 ('J2208002', 'BUK5', 8, 'pcs', 160000, NULL, NULL),
 ('J2303001', 'MUS1', 22, 'pcs', 230000, NULL, NULL),
 ('J2303003', 'BUK5', 222, 'pcs', 200000, NULL, NULL),
-('J2303004', 'MUS1', 10, 'pcs', 230000, NULL, NULL);
+('J2303004', 'MUS1', 10, 'pcs', 230000, '2023-03-22 06:04:48', '2023-03-22 06:04:48'),
+('J2303005', 'MUS1', 10, 'pcs', 230000, NULL, NULL),
+('J2303006', 'MUS1', 100, 'pcs', 230000, NULL, NULL),
+('J2303007', 'MUS1', 10, 'pcs', 230000, NULL, NULL),
+('J2303008', 'MUS1', 10, 'pcs', 230000, NULL, NULL);
 
 --
--- Triggers `detail_barang_keluar`
+-- Trigger `detail_barang_keluar`
 --
 DELIMITER $$
 CREATE TRIGGER `in_kutus` AFTER INSERT ON `detail_barang_keluar` FOR EACH ROW BEGIN
@@ -408,7 +416,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detail_barang_masuk`
+-- Struktur dari tabel `detail_barang_masuk`
 --
 
 CREATE TABLE `detail_barang_masuk` (
@@ -420,7 +428,7 @@ CREATE TABLE `detail_barang_masuk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `detail_barang_masuk`
+-- Dumping data untuk tabel `detail_barang_masuk`
 --
 
 INSERT INTO `detail_barang_masuk` (`invoice_id`, `produk_id`, `jumlah`, `satuan_id`, `harga`) VALUES
@@ -484,10 +492,15 @@ INSERT INTO `detail_barang_masuk` (`invoice_id`, `produk_id`, `jumlah`, `satuan_
 ('B210524', 'MMI2', 8, 'pcs', 250000),
 ('B210525', 'MUS1', 700, 'pcs', 230000),
 ('B210526', 'MMI2', 1000, 'pcs', 250000),
-('B220801', 'MUS1', 701, 'pcs', 230000);
+('B220801', 'MUS1', 701, 'pcs', 230000),
+('B230301', 'BUK5', 1, 'pcs', 200000),
+('B230302', 'MMI2', 10, 'pcs', 250000),
+('B230301', 'MUS1', 10, 'pcs', 230000),
+('B230302', 'BUK5', 10, 'pcs', 20000),
+('B230303', 'MMI2', 10, 'pcs', 230000);
 
 --
--- Triggers `detail_barang_masuk`
+-- Trigger `detail_barang_masuk`
 --
 DELIMITER $$
 CREATE TRIGGER `tambah_stok` AFTER INSERT ON `detail_barang_masuk` FOR EACH ROW BEGIN
@@ -504,7 +517,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `grade`
+-- Struktur dari tabel `grade`
 --
 
 CREATE TABLE `grade` (
@@ -512,44 +525,44 @@ CREATE TABLE `grade` (
   `jenis_grade` varchar(15) NOT NULL,
   `produk_id` varchar(4) NOT NULL,
   `potongan` int(6) NOT NULL,
-  `status_del` tinyint(1) NOT NULL DEFAULT '1'
+  `status_del` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `grade`
+-- Dumping data untuk tabel `grade`
 --
 
 INSERT INTO `grade` (`grade_id`, `jenis_grade`, `produk_id`, `potongan`, `status_del`) VALUES
-('G1', 'Reseller', 'MUS1', 40000, 1),
-('G1', 'Reseller', 'MMI2', 30000, 1),
-('G1', 'Reseller', 'SLA3', 3000, 1),
-('G1', 'Reseller', 'SMU4', 3000, 1),
-('G1', 'Reseller', 'BUK5', 20000, 1),
-('G2', 'Depo Perwira', 'MUS1', 50000, 1),
-('G2', 'Depo Perwira', 'MMI2', 45000, 1),
-('G2', 'Depo Perwira', 'SLA3', 6000, 1),
-('G2', 'Depo Perwira', 'SMU4', 11000, 1),
-('G2', 'Depo Perwira', 'BUK5', 30000, 1),
-('G3', 'Depo Utama', 'MUS1', 60000, 1),
-('G3', 'Depo Utama', 'MMI2', 60000, 1),
-('G3', 'Depo Utama', 'SLA3', 9000, 1),
-('G3', 'Depo Utama', 'SMU4', 19000, 1),
-('G3', 'Depo Utama', 'BUK5', 40000, 1),
-('G4', 'Depo Madya', 'MUS1', 70000, 1),
-('G4', 'Depo Madya', 'MMI2', 75000, 1),
-('G4', 'Depo Madya', 'SLA3', 12000, 1),
-('G4', 'Depo Madya', 'SMU4', 27000, 1),
-('G4', 'Depo Madya', 'BUK5', 50000, 1),
-('G5', 'Distributor', 'MUS1', 80000, 1),
-('G5', 'Distributor', 'MMI2', 90000, 1),
-('G5', 'Distributor', 'SLA3', 15000, 1),
-('G5', 'Distributor', 'SMU4', 35000, 1),
-('G5', 'Distributor', 'BUK5', 60000, 1);
+('G1', 'Reseller', 'MUS1', 0, 1),
+('G1', 'Reseller', 'MMI2', 0, 1),
+('G1', 'Reseller', 'SLA3', 0, 1),
+('G1', 'Reseller', 'SMU4', 0, 1),
+('G1', 'Reseller', 'BUK5', 0, 1),
+('G2', 'Depo Perwira', 'MUS1', 0, 1),
+('G2', 'Depo Perwira', 'MMI2', 0, 1),
+('G2', 'Depo Perwira', 'SLA3', 0, 1),
+('G2', 'Depo Perwira', 'SMU4', 0, 1),
+('G2', 'Depo Perwira', 'BUK5', 0, 1),
+('G3', 'Depo Utama', 'MUS1', 0, 1),
+('G3', 'Depo Utama', 'MMI2', 0, 1),
+('G3', 'Depo Utama', 'SLA3', 0, 1),
+('G3', 'Depo Utama', 'SMU4', 0, 1),
+('G3', 'Depo Utama', 'BUK5', 0, 1),
+('G4', 'Depo Madya', 'MUS1', 0, 1),
+('G4', 'Depo Madya', 'MMI2', 0, 1),
+('G4', 'Depo Madya', 'SLA3', 0, 1),
+('G4', 'Depo Madya', 'SMU4', 0, 1),
+('G4', 'Depo Madya', 'BUK5', 0, 1),
+('G5', 'Distributor', 'MUS1', 0, 1),
+('G5', 'Distributor', 'MMI2', 0, 1),
+('G5', 'Distributor', 'SLA3', 0, 1),
+('G5', 'Distributor', 'SMU4', 0, 1),
+('G5', 'Distributor', 'BUK5', 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `produk`
+-- Struktur dari tabel `produk`
 --
 
 CREATE TABLE `produk` (
@@ -559,25 +572,25 @@ CREATE TABLE `produk` (
   `satuan_id` varchar(4) NOT NULL,
   `harga_modal` int(6) NOT NULL,
   `harga_jual` int(6) NOT NULL,
-  `status_del` tinyint(1) NOT NULL DEFAULT '1',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `status_del` tinyint(1) NOT NULL DEFAULT 1,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `produk`
+-- Dumping data untuk tabel `produk`
 --
 
 INSERT INTO `produk` (`produk_id`, `nama_produk`, `jumlah_stok`, `satuan_id`, `harga_modal`, `harga_jual`, `status_del`, `updated_at`) VALUES
-('MUS1', 'Minyak Kutus - Kutus', 1369, 'pcs', 130000, 230000, 1, '2023-03-21 12:00:54'),
-('MMI2', 'Minyak Tanamu Tanami', 1384, 'pcs', 150000, 250000, 1, '2022-08-03 04:50:34'),
+('MUS1', 'Minyak Kutus - Kutus', 1249, 'pcs', 130000, 230000, 1, '2023-03-22 13:09:20'),
+('MMI2', 'Minyak Tanamu Tanami', 1404, 'pcs', 150000, 250000, 1, '2023-03-22 11:30:20'),
 ('SLA3', 'Sabun Kalila', 541, 'pcs', 25000, 45000, 1, '2022-08-03 04:58:19'),
 ('SMU4', 'Sabun Tanamu', 896, 'pcs', 35000, 75000, 1, '2021-05-31 06:40:09'),
-('BUK5', 'Bubuk Kutus', 402, 'pcs', 100000, 200000, 1, '2023-03-21 11:56:07');
+('BUK5', 'Bubuk Kutus', 20, 'pcs', 10000, 20000, 1, '2023-03-22 11:27:02');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reseller`
+-- Struktur dari tabel `reseller`
 --
 
 CREATE TABLE `reseller` (
@@ -593,7 +606,7 @@ CREATE TABLE `reseller` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `reseller`
+-- Dumping data untuk tabel `reseller`
 --
 
 INSERT INTO `reseller` (`reseller_id`, `nama_reseller`, `alamat`, `total_kutus`, `tanggal_kutus`, `grade_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -601,28 +614,29 @@ INSERT INTO `reseller` (`reseller_id`, `nama_reseller`, `alamat`, `total_kutus`,
 ('RL002', 'Jaonaay Jinjett Wattanasin', 'Jl. Surapati II no.2', 5, '2021-01-04', 'G1', NULL, NULL, NULL),
 ('RL003', 'Chutimon Chuengcharoensukying', 'Jalan R. P. Suroso no. 9 kelurahan sukamaju', 13, '2021-01-04', 'G1', NULL, NULL, NULL),
 ('RL004', 'Chanon Santinatornkul', 'Jalan Serabi kota 45', 3, '2021-01-05', 'G1', NULL, NULL, NULL),
-('RL005', 'Hanna Montana', 'Amerika Serikat', 3, '2021-01-05', 'G1', NULL, NULL, NULL),
+('RL005', 'Hanna Montana', 'Amerika Serikat', 3, '2021-01-05', 'G1', NULL, '2023-03-22 06:05:23', '2023-03-22 06:05:23'),
 ('RL006', 'Bright Vachirawit', 'Jl. Pad Thai No. 1', 2, '2021-04-25', 'G3', NULL, '2021-05-22 08:55:21', NULL),
 ('RL007', 'Win Metawin', 'Jl. Maew No. 2', 22, '2021-04-25', 'G1', NULL, NULL, NULL),
 ('RL008', 'Singto Prachaya', 'Jl. Mango No. 3', 706, '2021-04-21', 'G1', NULL, NULL, NULL),
-('RL009', 'Pimchanok Luevisadpaibul', 'Jl. Patthaya', 100, '2021-05-13', 'G5', '2021-05-13 10:03:06', '2021-05-13 10:03:06', NULL),
+('RL009', 'Pimchanok Luevisadpaibul', 'Jl. Patthaya', 110, '2021-05-13', 'G5', '2021-05-13 10:03:06', '2021-05-13 10:03:06', NULL),
 ('RL010', 'HAHAHAHAH', 'jalani semua ini', 0, '2021-05-22', 'G2', '2021-05-22 08:56:45', '2021-05-22 08:56:45', NULL),
-('RL011', 'Mei-Mei', 'Jalan Ahmad Yani', 0, '2021-05-28', 'G3', '2021-05-27 22:54:09', '2021-05-27 22:54:09', NULL);
+('RL011', 'Mei-Mei', 'Jalan Ahmad Yani', 100, '2021-05-28', 'G3', '2021-05-27 22:54:09', '2021-05-27 22:54:09', NULL),
+('RL012', 'Nyoman Pagi', 'Gianyar', 20, '2023-03-21', 'G1', '2023-03-21 07:36:34', '2023-03-21 07:36:34', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `satuan`
+-- Struktur dari tabel `satuan`
 --
 
 CREATE TABLE `satuan` (
   `satuan_id` varchar(4) NOT NULL,
   `nama_satuan` varchar(10) NOT NULL,
-  `status_del` tinyint(1) NOT NULL DEFAULT '1'
+  `status_del` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `satuan`
+-- Dumping data untuk tabel `satuan`
 --
 
 INSERT INTO `satuan` (`satuan_id`, `nama_satuan`, `status_del`) VALUES
@@ -635,7 +649,7 @@ INSERT INTO `satuan` (`satuan_id`, `nama_satuan`, `status_del`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stock_opname`
+-- Struktur dari tabel `stock_opname`
 --
 
 CREATE TABLE `stock_opname` (
@@ -653,7 +667,7 @@ CREATE TABLE `stock_opname` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `stock_opname`
+-- Dumping data untuk tabel `stock_opname`
 --
 
 INSERT INTO `stock_opname` (`opname_id`, `admin_id`, `produk_id`, `satuan_id`, `jumlah_sistem`, `jumlah_hitung`, `perbedaan`, `alasan`, `tanggal`, `created_at`, `updated_at`) VALUES
@@ -666,10 +680,11 @@ INSERT INTO `stock_opname` (`opname_id`, `admin_id`, `produk_id`, `satuan_id`, `
 ('SO2107', 'owner', 'MMI2', 'pcs', 323, 300, 23, 'DIpecahin Preti Kiki Pluto', '2021-05-16', '2021-05-16 01:56:23', '2021-05-16 01:56:23'),
 ('SO2108', 'owner', 'MUS1', 'pcs', 421, 400, 21, 'Dipecahin Preti Kiki Pluto', '2021-05-17', '2021-05-17 00:57:29', '2021-05-17 00:57:29'),
 ('SO2109', 'owner', 'SMU4', 'pcs', 231, 780, -549, 'gatau ya', '2021-05-22', '2021-05-22 08:58:25', '2021-05-22 08:58:25'),
-('SO2201', 'hai', 'SLA3', 'pcs', 542, 541, 1, 'gatau ya', '2022-08-03', '2022-08-02 21:58:19', '2022-08-02 21:58:19');
+('SO2301', 'owner', 'MUS1', 'pcs', 1369, 1370, -1, 'Salah hitung', '2023-03-22', '2023-03-22 02:23:07', '2023-03-22 02:23:07'),
+('SO2302', 'owner', 'MUS1', 'pcs', 1270, 1269, 1, 'Salah hitung', '2023-03-22', '2023-03-22 03:49:04', '2023-03-22 03:49:04');
 
 --
--- Triggers `stock_opname`
+-- Trigger `stock_opname`
 --
 DELIMITER $$
 CREATE TRIGGER `apdet_stok` AFTER INSERT ON `stock_opname` FOR EACH ROW BEGIN
@@ -690,25 +705,25 @@ DELIMITER ;
 --
 
 --
--- Indexes for table `admin`
+-- Indeks untuk tabel `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
 
 --
--- Indexes for table `barang_keluar`
+-- Indeks untuk tabel `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
   ADD PRIMARY KEY (`nota_id`);
 
 --
--- Indexes for table `barang_masuk`
+-- Indeks untuk tabel `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
   ADD PRIMARY KEY (`invoice_id`);
 
 --
--- Indexes for table `stock_opname`
+-- Indeks untuk tabel `stock_opname`
 --
 ALTER TABLE `stock_opname`
   ADD PRIMARY KEY (`opname_id`);
