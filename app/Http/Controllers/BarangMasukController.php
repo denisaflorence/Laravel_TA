@@ -22,31 +22,32 @@ use Illuminate\Http\Request;
 
 class BarangMasukController extends Controller
 {
-
+    
     public function addproduk(){
-
+        
         $nota = DB::select('CALL ID_barangmasuk');
         $produk = Produk::all();
-
+        
         return view('Barang_Masuk.tambah',compact('nota','produk'));
     }
 
     public function insert_incoming(Request $request){
         $data = $request->all();
+        // dd($data);
         $invoice_id = $_POST['invoice_id'];
-        // $admin_id = Session::get('login');
+        $admin_id = Session::get('login');
         $tanggal = Carbon::createFromFormat('d/m/Y', $request->tanggal)->toDateString();
-        $total = (int)str_replace('.', '', $_POST['total_seluruh']);
+        $total = $_POST['total_seluruh'];
         $produk_id = $_POST['produk_id'];
         $jumlah = $_POST['jumlah'];
         $harga_satuan = $_POST['harga_satuan'];
 
         // INSERT BARANG MASUK
-        $insert = DB::select(DB::raw("CALL insert_barangmasuk(:id_invo, :tanggal, :total, :admin_id)"),[
+        $insert = DB::select(DB::raw("CALL insert_barangmasuk(:id_invo, :id_admin, :tanggal,  :total)"),[
             ':id_invo' => $invoice_id,
+            ':id_admin' => 'owner',
             ':tanggal' => $tanggal,
             ':total' => $total,
-            ':admin_id' => 'owner',
         ]);
 
         // INSERT DETAIL BARANG MASUK
@@ -55,14 +56,13 @@ class BarangMasukController extends Controller
                 ':id_invo' => $invoice_id,
                 ':id_prod' => $produk_id,
                 ':jum' => $data['jumlah'][$index],
-                ':harga' => (int)str_replace('.', '', $data['harga_satuan'][$index])
+                ':harga' => $data['harga_satuan'][$index]
             ]);
         }
         return redirect('/barangmasuk');
-
     }
 
-
+    
 
     public function edit($id){
         $incoming = BarangMasuk::where('invoice_id', $id)->first();
@@ -87,7 +87,7 @@ class BarangMasukController extends Controller
         $month = $_POST['month'];
         // dd($month);
         $monthName = date("F", mktime(0, 0, 0, $month, 10));
-
+        
         // dd($monthName);
 
         $res = DB::select('SELECT p.nama_produk, SUM(dbm.jumlah*harga) AS total, SUM(dbm.jumlah) AS jumlah
@@ -104,7 +104,7 @@ class BarangMasukController extends Controller
         // dd($res,$total);
         return view('Barang_Masuk.preview_detail_pdf', compact('monthName','res','total','month'));
 
-
+       
     }
 
     public function laporan_bulan(Request $request) {
@@ -112,7 +112,7 @@ class BarangMasukController extends Controller
         // dd($month);
 
         $monthName = date("F", mktime(0, 0, 0, $month, 10));
-
+        
         // dd($monthName);
 
         $res = DB::select('SELECT p.nama_produk, SUM(dbm.jumlah*harga) AS total, SUM(dbm.jumlah) AS jumlah
@@ -127,16 +127,16 @@ class BarangMasukController extends Controller
         GROUP BY dbm.produk_id) a
         ');
         // dd($res,$total);
-
+       
         ini_set('max_execution_time', 300);
         $pdf = PDF::loadview('Barang_Masuk.detail_pdf', compact('res','total','monthName') );
         return $pdf->stream();
+      
 
-
-
+       
     }
 
-
+   
 
     public function combo_box_tahun() {
         $tahun = DB::select('SELECT EXTRACT(YEAR FROM tanggal) AS year
@@ -162,11 +162,11 @@ class BarangMasukController extends Controller
         GROUP BY dbm.produk_id) a
         ');
         // dd($res,$total);
-
+       
         return view('Barang_Masuk.preview_detail_tahun_pdf', compact('year','res','total'));
+      
 
-
-
+       
     }
 
     public function laporan_tahun(Request $request) {
@@ -184,14 +184,14 @@ class BarangMasukController extends Controller
         GROUP BY dbm.produk_id) a
         ');
         // dd($res,$total);
-
+       
         ini_set('max_execution_time', 300);
         $pdf = PDF::loadview('Barang_Masuk.detail_tahun_pdf', compact('res','total','year') );
         return $pdf->stream();
 
-
+       
     }
-
+   
 
 
 }

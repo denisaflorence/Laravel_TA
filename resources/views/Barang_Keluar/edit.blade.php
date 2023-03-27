@@ -20,45 +20,31 @@
     <form action="/barangkeluar/edit/update" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()" name="" id="">
     @csrf
         <div class="card-body" style="margin-top: 40px">
+        <div class="row col" style="margin-top:30px;">
+                   
             <div class="row gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <h3 class="mb-2 text-primary" style="padding-bottom:20px;">Ubah Barang Keluar</h3>
                 </div>
+
                 <div class="ini">
                     <div class="col">
                         <label for="fullName" class='font-weight-bold'>Nota No.</label>
                         <input type="text" class="form-control" id="fullName" value="{{$exit->nota_id}}" name="nota_id" readonly>
                     </div>
-
-                    
                     <div class="col ">
                         <label for="fullName" class='font-weight-bold'>Nama Reseller </label>
                         <input type="text" class="form-control" id="fullName" value="{{$exit->reseller->nama_reseller}}"
                             readonly>
                     </div>
+                    
                 </div>
-                <div class="row">
-                    <div class="col mb-4 ml-4">
+                <div class="col text-right">
                         <label for="phone" class='font-weight-bold'>Tanggal</label>
-                        <input type="date" class="form-control" id="from-datepicker" value="{{$exit->tanggal ?? now()}}" readonly>
-                    </div>
+                        <input type="date" class="form-control md-3" style="text-align:right;" id="from-datepicker" value="{{$exit->tanggal ?? now()}}" readonly>
                 </div>
-                <div class="row align-items-end">
-                    <div class="col ml-3 mt-5">
-                        <label for="fullName" class='font-weight-bold'>Harga Total Penjualan </label>
-                        <input type="text" class="form-control" value="{{$exit->total_harga_penjualan}}" id="total_harga_penjualan" name="total_harga_penjualan" readonly>
-                    </div>
-                    <div class="col">
-                        <label for="eMail" class='font-weight-bold'>Sudah Dibayar</label>
-                        <input type="text" class="form-control" value="{{$exit->sudah_dibayar}}" id="sudah_dibayar" onkeyup="myFunction()" name="sudah_dibayar">
-                    </div>
-                    <div class="col">
-                        <label for="eMail" class='font-weight-bold'>Sisa Bayar</label>
-                        <input type="text" class="form-control" value="{{$exit->total_harga_penjualan - $exit->sudah_dibayar}}" id="mySelect" name="belum_dibayar" readonly>
-                    </div>
-                </div>
-                <div class="row col" style="margin-top:30px;">
-                    <div class="col-md-12 row">
+
+                <div class="col-md-12 row">
                         <div class="col-md-3"><label for="fullName" class='font-weight-bold'>Nama Produk </label></div>
                         <div class="col-md-3"><label for="fullName" class='font-weight-bold'>Jumlah</label></div>
                         <div class="col-md-3"><label for="eMail" class='font-weight-bold'>Harga Satuan</label></div>
@@ -92,6 +78,27 @@
                     </div>
                     @endforeach
                 </div>
+             
+                
+                <div class="row align-items-end">
+                    <div class="col ml-3 mt-5">
+                        <label for="fullName" class='font-weight-bold'>Harga Total Penjualan </label>
+                        <input type="text" class="form-control" value="{{$exit->total_harga_penjualan}}" id="total_harga_penjualan" name="total_harga_penjualan" readonly>
+                    </div>
+                    <div class="col">
+                        <label for="eMail" class='font-weight-bold'>Sudah Dibayar</label>
+                        <input type="text" class="form-control" value="{{$exit->sudah_dibayar}}" id="sudah_dibayar" onkeyup="myFunction()" name="sudah_dibayar">
+                    </div>
+                    <div class="col">
+                        <label for="eMail" class='font-weight-bold'>Sisa Bayar</label>
+                        <input type="text" class="form-control" value="{{$exit->total_harga_penjualan - $exit->sudah_dibayar}}" id="mySelect" name="belum_dibayar" readonly>
+                    </div>
+                    <div class="col-4">
+                        <label for="eMail" class='font-weight-bold'>Tanggal Pelunasan</label>
+                        <input type="date" class="form-control" value="{{$exit->tanggal_pelunasan}}" id="mySelect" name="tanggal_pelunasan" >
+                    </div>
+                </div>
+                
             </div>
 
             <div class="row gutters">

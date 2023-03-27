@@ -213,8 +213,8 @@
                             <thead>
                                 <tr>
                                     <!-- <th>#</th> -->
-                                    <th class="text-left"><h5>Nama produk</h5></th>
                                     <th class="text-center"><h5>Jumlah</h5></th>
+                                    <th class="text-center"><h5>Nama produk</h5></th>
                                     <th class="text-center"><h5>Harga satuan</h5></th>
                                     <th class="text-center"><h5>Subtotal</h5></th>
                                 </tr>
@@ -223,14 +223,14 @@
                             @foreach($det as $d)
                                 <tr>
                                     <!-- <td class="no">01</td> -->
+                                    <td class="qty" style="text-align:center;">{{$d->jumlah}} pcs</td>
                                     <td class="text-left">
                                         <h3>
                                             {{$d->produk->nama_produk}}
                                         </h3>
                                     </td>
-                                    <td class="qty" style="text-align:center;">{{$d->jumlah}} pcs</td>
-                                    <td class="unit" style="text-align:center;">@currency($d->harga_satuan)</td>
-                                    <td class="total" style="text-align:center;">@currency(($d->jumlah)*($d->harga_satuan))</td>
+                                    <td class="unit">@currency($d->harga_satuan)</td>
+                                    <td class="total">@currency(($d->jumlah)*($d->harga_satuan))</td>
                                 </tr>
                             @endforeach 
                             </tbody>

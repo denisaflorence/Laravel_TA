@@ -29,39 +29,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                            <!-- BENTAR YA GENGS TA REMARK SEK -->
-
-                                <!-- <tr class="2" style="background-color: #DAC1AE;">
-                                    <td>Monas</td>
-                                    <td>Jakarta, Indonesia</td>
-                                    <td>January 22, 2019</td>
-                                    <td>US$ 20</td>
-                                    <td>
-                                        <a href="manage_wisata.html" class="btn btn-small-table btn-primary ">Details</a>
-                                    </td>
-                                </tr>
-
-                                <tr class="3" style="background-color: #DAC1AE">
-                                    <td>Candi</td>
-                                    <td>Magelang, Indonesia</td>
-                                    <td>March 1, 2019</td>
-                                    <td>US$ 220</td>
-                                    <td>
-                                        <a href="manage_wisata.html" class="btn btn-small-table btn-primary ">Details</a>
-                                    </td>
-                                </tr>
-                                <tr class="4" style="background-color: #DAC1AE">
-                                    <td>Pisa</td>
-                                    <td>Plance, Italy</td>
-                                    <td>August 16, 2019</td>
-                                    <td>US$ 120</td>
-                                    <td>
-                                        <a href="manage_wisata.html" class="btn btn-small-table btn-primary ">Details</a>
-                                    </td>
-                                </tr> -->
-
-
                             </tbody>
                         </table>
 

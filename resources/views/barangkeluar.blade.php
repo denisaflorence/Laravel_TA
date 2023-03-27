@@ -47,7 +47,7 @@
       processing: true,
       serverside: true,
       ajax: 'barangkeluar/exit_json',
-      order: [[0, 'desc']],
+      order: [[3, 'asc']],
       columns: [{
           data: 'nota_id',
           name: 'nota_id'

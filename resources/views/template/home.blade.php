@@ -18,7 +18,7 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm " style="overflow:hidden; width:100%; height:8%; z-index:9999; background-color:#b28e6b">
+    <nav class="navbar navbar-expand-sm " style="position: fixed; overflow:hidden; width:100%; height:8%; z-index:9999; background-color:#b28e6b">
         <a class="navbar-brand" href=""><img src="/assets/img/logo.png" height="50" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -96,10 +96,8 @@
                     <i class="fa-solid fa-file-invoice-dollar" style= "font-size: 24px"></i> Laporan Penjualan
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="/laporan/bln" style="font-size: 16px">Produk Periodik</a>
-                        <a class="dropdown-item" href="/laporan/thn" style="font-size: 16px">Produk Tahunan</a>
-                        <a class="dropdown-item" href="/laporanpenjualan/bln" style="font-size: 16px">Periodik</a>
-                        <a class="dropdown-item" href="/laporanpenjualan/thn" style="font-size: 16px">Tahunan</a>
+                        <a class="dropdown-item" href="/laporan/bln" style="font-size: 16px">Periodik</a>
+                        <a class="dropdown-item" href="/laporan/bln" style="font-size: 16px">Tahunan</a>
                     </div>
                 </div>
                 <!-- End Of Laporan Penjualan -->
@@ -110,8 +108,8 @@
                     <i class="fa-solid fa-file-lines" style= "font-size: 24px"></i>Laporan Pembelian
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="/laporan/bulan" style="font-size: 16px">Periodik</a>
-                        <a class="dropdown-item" href="/laporan/tahun" style="font-size: 16px">Tahunan</a>
+                        <a class="dropdown-item" href="" style="font-size: 16px">Periodik</a>
+                        <a class="dropdown-item" href="" style="font-size: 16px">Tahunan</a>
                     </div>
                 </div>
                 <!-- End Of Laporan Pembelian -->
