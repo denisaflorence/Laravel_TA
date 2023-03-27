@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Waktu pembuatan: 24 Mar 2023 pada 07.07
--- Versi server: 10.4.21-MariaDB
--- Versi PHP: 8.1.6
+-- Host: localhost:3306
+-- Generation Time: Mar 24, 2023 at 09:03 AM
+-- Server version: 5.7.33
+-- PHP Version: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 
 DELIMITER $$
 --
--- Prosedur
+-- Procedures
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ID_barangkeluar` ()  NO SQL BEGIN
 SET @cek = (
@@ -117,7 +117,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -129,14 +129,14 @@ CREATE TABLE `admin` (
   `nomor_telepon` varchar(13) NOT NULL,
   `email` varchar(50) NOT NULL,
   `akses_id` tinyint(1) NOT NULL,
-  `status_del` tinyint(1) NOT NULL DEFAULT 1,
+  `status_del` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`admin_id`, `password`, `nama_admin`, `gaji`, `alamat`, `nomor_telepon`, `email`, `akses_id`, `status_del`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -145,7 +145,7 @@ INSERT INTO `admin` (`admin_id`, `password`, `nama_admin`, `gaji`, `alamat`, `no
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang_keluar`
+-- Table structure for table `barang_keluar`
 --
 
 CREATE TABLE `barang_keluar` (
@@ -164,7 +164,7 @@ CREATE TABLE `barang_keluar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `barang_keluar`
+-- Dumping data for table `barang_keluar`
 --
 
 INSERT INTO `barang_keluar` (`nota_id`, `admin_id`, `tanggal`, `reseller_id`, `total_harga_penjualan`, `sudah_dibayar`, `belum_dibayar`, `tanggal_pelunasan`, `jumlah_kutus`, `created_at`, `deleted_at`, `updated_at`) VALUES
@@ -212,12 +212,14 @@ INSERT INTO `barang_keluar` (`nota_id`, `admin_id`, `tanggal`, `reseller_id`, `t
 ('J2303005', 'owner', '2023-03-21', 'RL012', 1900000, 1900000, 0, '2023-03-22', 10, NULL, NULL, '2023-03-22 05:39:35'),
 ('J2303006', 'owner', '2023-03-22', 'RL011', 17000000, 17000000, 0, '2023-03-22', 100, NULL, NULL, '2023-03-22 05:39:04'),
 ('J2303007', 'owner', '2023-03-22', 'RL012', 1900000, 100000, 1800000, '2023-03-31', 10, NULL, NULL, '2023-03-22 05:33:07'),
-('J2303008', 'owner', '2023-03-22', 'RL009', 2300000, 100000, 2200000, '2023-04-20', 10, NULL, NULL, '2023-03-22 06:09:32');
+('J2303008', 'owner', '2023-03-22', 'RL009', 2300000, 100000, 2200000, '2023-04-20', 10, NULL, NULL, '2023-03-22 06:09:32'),
+('J2303009', 'owner', '2023-11-24', 'RL001', 5060000, 0, 5060000, '0000-00-00', 22, NULL, NULL, NULL),
+('J2303010', 'owner', '2023-11-24', 'RL002', 5250000, 0, 5250000, '0000-00-00', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang_masuk`
+-- Table structure for table `barang_masuk`
 --
 
 CREATE TABLE `barang_masuk` (
@@ -226,11 +228,11 @@ CREATE TABLE `barang_masuk` (
   `tanggal` date NOT NULL,
   `total_harga` int(12) NOT NULL,
   `invoice_status` tinyint(1) NOT NULL,
-  `status_del` tinyint(1) NOT NULL DEFAULT 1
+  `status_del` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `barang_masuk`
+-- Dumping data for table `barang_masuk`
 --
 
 INSERT INTO `barang_masuk` (`invoice_id`, `admin_id`, `tanggal`, `total_harga`, `invoice_status`, `status_del`) VALUES
@@ -266,14 +268,13 @@ INSERT INTO `barang_masuk` (`invoice_id`, `admin_id`, `tanggal`, `total_harga`, 
 ('B210525', 'owner', '2021-05-31', 161000000, 1, 1),
 ('B210526', 'owner', '2021-05-31', 250000000, 1, 1),
 ('B220801', 'hai', '2022-08-03', 161230000, 1, 1),
-('B230301', 'owner', '0000-00-00', 2023, 1, 1),
-('B230302', 'owner', '0000-00-00', 2023, 1, 1),
-('B230303', '2300000', '0000-00-00', 2023, 1, 1);
+('B230301', 'owner', '2023-11-24', 14544, 1, 1),
+('B230302', 'owner', '2023-11-24', 14666652, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `detail_barang_keluar`
+-- Table structure for table `detail_barang_keluar`
 --
 
 CREATE TABLE `detail_barang_keluar` (
@@ -287,7 +288,7 @@ CREATE TABLE `detail_barang_keluar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `detail_barang_keluar`
+-- Dumping data for table `detail_barang_keluar`
 --
 
 INSERT INTO `detail_barang_keluar` (`nota_id`, `produk_id`, `jumlah`, `satuan_id`, `harga_satuan`, `deleted_at`, `updated_at`) VALUES
@@ -384,10 +385,12 @@ INSERT INTO `detail_barang_keluar` (`nota_id`, `produk_id`, `jumlah`, `satuan_id
 ('J2303005', 'MUS1', 10, 'pcs', 230000, NULL, NULL),
 ('J2303006', 'MUS1', 100, 'pcs', 230000, NULL, NULL),
 ('J2303007', 'MUS1', 10, 'pcs', 230000, NULL, NULL),
-('J2303008', 'MUS1', 10, 'pcs', 230000, NULL, NULL);
+('J2303008', 'MUS1', 10, 'pcs', 230000, NULL, NULL),
+('J2303009', 'MUS1', 22, 'pcs', 230000, NULL, NULL),
+('J2303010', 'MMI2', 21, 'pcs', 250000, NULL, NULL);
 
 --
--- Trigger `detail_barang_keluar`
+-- Triggers `detail_barang_keluar`
 --
 DELIMITER $$
 CREATE TRIGGER `in_kutus` AFTER INSERT ON `detail_barang_keluar` FOR EACH ROW BEGIN
@@ -416,7 +419,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `detail_barang_masuk`
+-- Table structure for table `detail_barang_masuk`
 --
 
 CREATE TABLE `detail_barang_masuk` (
@@ -428,7 +431,7 @@ CREATE TABLE `detail_barang_masuk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `detail_barang_masuk`
+-- Dumping data for table `detail_barang_masuk`
 --
 
 INSERT INTO `detail_barang_masuk` (`invoice_id`, `produk_id`, `jumlah`, `satuan_id`, `harga`) VALUES
@@ -497,10 +500,17 @@ INSERT INTO `detail_barang_masuk` (`invoice_id`, `produk_id`, `jumlah`, `satuan_
 ('B230302', 'MMI2', 10, 'pcs', 250000),
 ('B230301', 'MUS1', 10, 'pcs', 230000),
 ('B230302', 'BUK5', 10, 'pcs', 20000),
-('B230303', 'MMI2', 10, 'pcs', 230000);
+('B230303', 'MMI2', 10, 'pcs', 230000),
+('B230304', 'MUS1', 22, 'pcs', 22222),
+('B230303', 'MUS1', 1222, 'pcs', 22),
+('B230302', 'MMI2', 12, 'pcs', 1232112),
+('B230302', 'MUS1', 12, 'pcs', 122),
+('B230301', 'MUS1', 12, 'pcs', 12121),
+('B230301', 'MUS1', 12, 'pcs', 1212),
+('B230302', 'MUS1', 121, 'pcs', 121212);
 
 --
--- Trigger `detail_barang_masuk`
+-- Triggers `detail_barang_masuk`
 --
 DELIMITER $$
 CREATE TRIGGER `tambah_stok` AFTER INSERT ON `detail_barang_masuk` FOR EACH ROW BEGIN
@@ -517,7 +527,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `grade`
+-- Table structure for table `grade`
 --
 
 CREATE TABLE `grade` (
@@ -525,11 +535,11 @@ CREATE TABLE `grade` (
   `jenis_grade` varchar(15) NOT NULL,
   `produk_id` varchar(4) NOT NULL,
   `potongan` int(6) NOT NULL,
-  `status_del` tinyint(1) NOT NULL DEFAULT 1
+  `status_del` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `grade`
+-- Dumping data for table `grade`
 --
 
 INSERT INTO `grade` (`grade_id`, `jenis_grade`, `produk_id`, `potongan`, `status_del`) VALUES
@@ -562,7 +572,7 @@ INSERT INTO `grade` (`grade_id`, `jenis_grade`, `produk_id`, `potongan`, `status
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `produk`
+-- Table structure for table `produk`
 --
 
 CREATE TABLE `produk` (
@@ -572,17 +582,17 @@ CREATE TABLE `produk` (
   `satuan_id` varchar(4) NOT NULL,
   `harga_modal` int(6) NOT NULL,
   `harga_jual` int(6) NOT NULL,
-  `status_del` tinyint(1) NOT NULL DEFAULT 1,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `status_del` tinyint(1) NOT NULL DEFAULT '1',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `produk`
+-- Dumping data for table `produk`
 --
 
 INSERT INTO `produk` (`produk_id`, `nama_produk`, `jumlah_stok`, `satuan_id`, `harga_modal`, `harga_jual`, `status_del`, `updated_at`) VALUES
-('MUS1', 'Minyak Kutus - Kutus', 1249, 'pcs', 130000, 230000, 1, '2023-03-22 13:09:20'),
-('MMI2', 'Minyak Tanamu Tanami', 1404, 'pcs', 150000, 250000, 1, '2023-03-22 11:30:20'),
+('MUS1', 'Minyak Kutus - Kutus', 2628, 'pcs', 130000, 230000, 1, '2023-03-24 07:31:44'),
+('MMI2', 'Minyak Tanamu Tanami', 1395, 'pcs', 150000, 250000, 1, '2023-03-24 07:36:41'),
 ('SLA3', 'Sabun Kalila', 541, 'pcs', 25000, 45000, 1, '2022-08-03 04:58:19'),
 ('SMU4', 'Sabun Tanamu', 896, 'pcs', 35000, 75000, 1, '2021-05-31 06:40:09'),
 ('BUK5', 'Bubuk Kutus', 20, 'pcs', 10000, 20000, 1, '2023-03-22 11:27:02');
@@ -590,7 +600,7 @@ INSERT INTO `produk` (`produk_id`, `nama_produk`, `jumlah_stok`, `satuan_id`, `h
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `reseller`
+-- Table structure for table `reseller`
 --
 
 CREATE TABLE `reseller` (
@@ -606,11 +616,11 @@ CREATE TABLE `reseller` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `reseller`
+-- Dumping data for table `reseller`
 --
 
 INSERT INTO `reseller` (`reseller_id`, `nama_reseller`, `alamat`, `total_kutus`, `tanggal_kutus`, `grade_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-('RL001', 'Juné Plearnpichaya Komalarajun', 'Jl. Jalan setiap minggu', 39, '2021-01-01', 'G1', NULL, NULL, NULL),
+('RL001', 'Juné Plearnpichaya Komalarajun', 'Jl. Jalan setiap minggu', 61, '2021-01-01', 'G1', NULL, NULL, NULL),
 ('RL002', 'Jaonaay Jinjett Wattanasin', 'Jl. Surapati II no.2', 5, '2021-01-04', 'G1', NULL, NULL, NULL),
 ('RL003', 'Chutimon Chuengcharoensukying', 'Jalan R. P. Suroso no. 9 kelurahan sukamaju', 13, '2021-01-04', 'G1', NULL, NULL, NULL),
 ('RL004', 'Chanon Santinatornkul', 'Jalan Serabi kota 45', 3, '2021-01-05', 'G1', NULL, NULL, NULL),
@@ -626,17 +636,17 @@ INSERT INTO `reseller` (`reseller_id`, `nama_reseller`, `alamat`, `total_kutus`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `satuan`
+-- Table structure for table `satuan`
 --
 
 CREATE TABLE `satuan` (
   `satuan_id` varchar(4) NOT NULL,
   `nama_satuan` varchar(10) NOT NULL,
-  `status_del` tinyint(1) NOT NULL DEFAULT 1
+  `status_del` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `satuan`
+-- Dumping data for table `satuan`
 --
 
 INSERT INTO `satuan` (`satuan_id`, `nama_satuan`, `status_del`) VALUES
@@ -649,7 +659,7 @@ INSERT INTO `satuan` (`satuan_id`, `nama_satuan`, `status_del`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `stock_opname`
+-- Table structure for table `stock_opname`
 --
 
 CREATE TABLE `stock_opname` (
@@ -667,7 +677,7 @@ CREATE TABLE `stock_opname` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `stock_opname`
+-- Dumping data for table `stock_opname`
 --
 
 INSERT INTO `stock_opname` (`opname_id`, `admin_id`, `produk_id`, `satuan_id`, `jumlah_sistem`, `jumlah_hitung`, `perbedaan`, `alasan`, `tanggal`, `created_at`, `updated_at`) VALUES
@@ -684,7 +694,7 @@ INSERT INTO `stock_opname` (`opname_id`, `admin_id`, `produk_id`, `satuan_id`, `
 ('SO2302', 'owner', 'MUS1', 'pcs', 1270, 1269, 1, 'Salah hitung', '2023-03-22', '2023-03-22 03:49:04', '2023-03-22 03:49:04');
 
 --
--- Trigger `stock_opname`
+-- Triggers `stock_opname`
 --
 DELIMITER $$
 CREATE TRIGGER `apdet_stok` AFTER INSERT ON `stock_opname` FOR EACH ROW BEGIN
@@ -705,25 +715,25 @@ DELIMITER ;
 --
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
 
 --
--- Indeks untuk tabel `barang_keluar`
+-- Indexes for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
   ADD PRIMARY KEY (`nota_id`);
 
 --
--- Indeks untuk tabel `barang_masuk`
+-- Indexes for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
   ADD PRIMARY KEY (`invoice_id`);
 
 --
--- Indeks untuk tabel `stock_opname`
+-- Indexes for table `stock_opname`
 --
 ALTER TABLE `stock_opname`
   ADD PRIMARY KEY (`opname_id`);
