@@ -19,37 +19,33 @@ use Illuminate\Support\Facades\Session as Session;
 use Yajra\DataTables\Facades\DataTables as DataTables;
 
 
-// use Yajra\DataTables\DataTables;
-//use Yajra\DataTables\Facades\DataTables as DataTables;
-
 class AwalController extends Controller
 {
     public function home(){
-        // echo "Halo Kamu ngakses Controller Awal pada function index";
         $results = Produk::select('*',
         DB::raw('(CASE 
             WHEN jumlah_stok <= "200" THEN "Stok Menipis"
             WHEN jumlah_stok = "0" THEN "Tidak Tersedia"
             ELSE "Tersedia" 
             END) AS status'))
-        ->get();
-        return view('dashboard', compact('results'));
-     
-    }
+            ->get();
 
-    // DATATABLE
-    // public function dashboard(){
-    //     $results = Produk::select('*',
-    //     \DB::raw('(CASE 
-    //         WHEN jumlah_stok <= "200" THEN "Stok Menipis"
-    //         WHEN jumlah_stok = "0" THEN "Tidak Tersedia"
-    //         ELSE "Tersedia" 
-    //         END) AS status'))
-    //     ->get();
-    //     // dd($results);
-                        
-    //     return Datatables::of($results)->make(true);
-    // }
+            // $results = Produk::select('* 
+            // WHERE jumlah_stok <= 200',
+            // DB::raw('(CASE 
+            //     WHEN jumlah_stok <= "200" THEN "Stok Menipis"
+            //     WHEN jumlah_stok = "0" THEN "Tidak Tersedia"
+            //     ELSE "Tersedia" 
+            //     END) AS status'))
+            //     ->get();
+       
+        $exit = DB::select('SELECT  r.reseller_id,r.nama_reseller, p.nama_produk, (bk.belum_dibayar) AS total, bk.tanggal_pelunasan
+        FROM barang_keluar AS bk, detail_barang_keluar AS dbk, reseller r, produk p
+        WHERE bk.belum_dibayar>0 AND r.reseller_id = bk.reseller_id
+        GROUP BY bk.tanggal_pelunasan');
+        return view('dashboard', compact('results','exit'));
+
+    }
 
 
     public function incoming(){
@@ -123,11 +119,7 @@ class AwalController extends Controller
 
 
     public function produk(){
-
-
         return view('produk');
-        // $incoming = BarangMasuk::all('invoice_id', 'total_harga', 'tanggal');
-        // dd($incoming);
     }
     // DATATABLE
     public function produk_json(){

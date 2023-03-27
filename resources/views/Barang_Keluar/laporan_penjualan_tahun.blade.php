@@ -201,41 +201,46 @@
                 </div>
             </div>
         </header>
-        <form action="/laporanpiutang/cetak" method="POST">
+        <form action="/laporanpenjualan/thn/cetak" method="POST">
             @csrf
             <main>
                 <div class="container">
                     <div class="text-center" style="margin-bottom:20px;">
                         <center>
-                            <h2>Laporan Piutang</h2>
+                            <h2>Laporan Penjualan Tahun {{$year}}</h2>
                         </center>
                     </div>
-      
+                    <input type="hidden" name="year" value={{$year}}>
                 </div>
                 <table cellspacing="0" cellpadding="0">
                     <thead>
                         <tr>
                             <!-- <th>#</th> -->
                             <th class="text-left"><h5>Nama Pembeli</h5></th>
-                            <th class="text-center"><h5>Sisa Bayar</h5></th>
+                            <th class="text-center"><h5>Jumlah</h5></th>
                             <!-- <th class="text-center"><h5>Harga satuan</h5></th> -->
-                            <th class="text-right"><h5>Tanggal Pelunasan</h5></th>
+                            <th class="text-right"><h5>Subtotal</h5></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($exit as $d)
                         <tr>
-                        <td class="text-left">
+                            <td class="text-left">
                                     {{$d->nama_reseller}}
                             </td>
-                            <!-- <td class="no">01</td> -->
-                            <td class="qty" style="text-align:center;">@currency($d->total) </td>
-                            
-                            <td class="unit">{{$d->tanggal_pelunasan}}</td>
+                            <td class="qty" style="text-align:center;">{{$d->jumlah}} pcs</td>
+                            <td class="unit" style="text-align:right;">@currency($d->total)</td>
+                            <!-- <td class="total">@currency(($d->jumlah)*($d->total))</td> -->
                         </tr>
                         @endforeach
                     </tbody>
-                
+                    <tfoot>
+                        <tr>
+                            <!-- <td colspan="2"></td> -->
+                            <td colspan="2"><strong>Total Harga</strong></td>
+                            <td><strong>@currency($total[0]->total_semua)</strong></td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <button type="submit" class="btn btn-primary btn-lg">Print Nota</button>
             </main>

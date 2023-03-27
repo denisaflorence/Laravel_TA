@@ -33,21 +33,20 @@ class BarangMasukController extends Controller
 
     public function insert_incoming(Request $request){
         $data = $request->all();
-        // dd($data);
         $invoice_id = $_POST['invoice_id'];
-        $admin_id = Session::get('login');
+        // $admin_id = Session::get('login');
         $tanggal = Carbon::createFromFormat('d/m/Y', $request->tanggal)->toDateString();
-        $total = $_POST['total_seluruh'];
+        $total = (int)str_replace('.', '', $_POST['total_seluruh']);
         $produk_id = $_POST['produk_id'];
         $jumlah = $_POST['jumlah'];
         $harga_satuan = $_POST['harga_satuan'];
 
         // INSERT BARANG MASUK
-        $insert = DB::select(DB::raw("CALL insert_barangmasuk(:id_invo, :id_admin, :tanggal,  :total)"),[
+        $insert = DB::select(DB::raw("CALL insert_barangmasuk(:id_invo, :tanggal, :total, :admin_id)"),[
             ':id_invo' => $invoice_id,
-            ':id_admin' => 'owner',
             ':tanggal' => $tanggal,
             ':total' => $total,
+            ':admin_id' => 'owner',
         ]);
 
         // INSERT DETAIL BARANG MASUK
@@ -56,10 +55,11 @@ class BarangMasukController extends Controller
                 ':id_invo' => $invoice_id,
                 ':id_prod' => $produk_id,
                 ':jum' => $data['jumlah'][$index],
-                ':harga' => $data['harga_satuan'][$index]
+                ':harga' => (int)str_replace('.', '', $data['harga_satuan'][$index])
             ]);
         }
         return redirect('/barangmasuk');
+
     }
 
     
@@ -85,10 +85,7 @@ class BarangMasukController extends Controller
         setlocale(LC_TIME, 'IND');  // or setlocale(LC_TIME, 'id_ID');
 
         $month = $_POST['month'];
-        // dd($month);
         $monthName = date("F", mktime(0, 0, 0, $month, 10));
-        
-        // dd($monthName);
 
         $res = DB::select('SELECT p.nama_produk, SUM(dbm.jumlah*harga) AS total, SUM(dbm.jumlah) AS jumlah
         FROM barang_masuk AS bm, detail_barang_masuk AS dbm, produk AS p
@@ -101,10 +98,9 @@ class BarangMasukController extends Controller
         WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bm.invoice_id = dbm.invoice_id
         GROUP BY dbm.produk_id) a
         ');
-        // dd($res,$total);
         return view('Barang_Masuk.preview_detail_pdf', compact('monthName','res','total','month'));
 
-       
+
     }
 
     public function laporan_bulan(Request $request) {

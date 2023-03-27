@@ -26,74 +26,7 @@
                         </thead>
                         <tbody>
 
-                        <!-- BENTAR YA GENGS TA REMARK SEK -->
-
-                            <!-- <tr class="2" style="background-color: #DAC1AE;">
-                                <td>Monas</td>
-                                <td>Jakarta, Indonesia</td>
-                                <td>January 22, 2019</td>
-                                <td>US$ 20</td>
-                                <td>
-                                    <a href="manage_wisata.html" class="btn btn-small-table btn-primary ">Details</a>
-                                </td>
-                            </tr>
-
-                            <tr class="3" style="background-color: #DAC1AE">
-                                <td>Candi</td>
-                                <td>Magelang, Indonesia</td>
-                                <td>March 1, 2019</td>
-                                <td>US$ 220</td>
-                                <td>
-                                    <a href="manage_wisata.html" class="btn btn-small-table btn-primary ">Details</a>
-                                </td>
-                            </tr>
-
-                            <tr class="4" style="background-color: #DAC1AE">
-                                <td>Pisa</td>
-                                <td>Plance, Italy</td>
-                                <td>August 16, 2019</td>
-                                <td>US$ 120</td>
-                                <td>
-                                    <a href="manage_wisata.html" class="btn btn-small-table btn-primary ">Details</a>
-                                </td>
-                            </tr> -->
-                            <!-- NANTI DIHAPUS -->
-                            <!-- Modal -->
-                            <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <!-- Modal Header -->
-                                        <div class="modal-header" style="background: orange">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
-                                                    class="ion-android-close"></span></button>
-                                            <h4 class="modal-title" id="myModalLabel" style="color: whitesmoke;">Donation For Siddhyog Sadhan Mandal
-                                            </h4>
-                                        </div> <!-- Modal Body -->
-                                        <div class="modal-body">
-                                            <div>
-                                                Payment Option
-                                            </div>
-                                            <form id="frm-donation" name="frm-donation">
-                                                <div class="header-btn">
-                                                    <div id="div-physical">
-                                                        <label>
-                                                            <input id="rdb_physical" name="rdb_donation" value="0" type="radio" checked=""
-                                                                class="validate[required]"
-                                                                data-errormessage-value-missing="Donation Type is required!">
-                                                            Physical Entity Donation
-                                                        </label>
-                                                    </div>
-                                            </form>
-                                            <div class="modal-body">
-                                                <div class="modal-footer" id="modal_footer">
-                                                    <!--<input id="btnSubmit" name="btnSubmit" value="Donate" class="btn btn-default-border-blk" type="submit">-->
-                                                    <a id="btnDonate" class="btn btn-default-border-blk">Donate</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                          <!-- DIHAPUS -->
+                        
                         </tbody>
                     </table>
 
