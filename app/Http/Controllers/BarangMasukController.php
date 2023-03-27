@@ -83,7 +83,11 @@ class BarangMasukController extends Controller
 
     public function preview_laporan_bulan(Request $request) {
         setlocale(LC_TIME, 'IND');  // or setlocale(LC_TIME, 'id_ID');
-
+        // $tahun = DB::select('SELECT EXTRACT(YEAR FROM tanggal) AS year
+        // FROM barang_masuk
+        // GROUP BY year
+        // ');
+        // $year = $_POST['year'];
         $month = $_POST['month'];
         $monthName = date("F", mktime(0, 0, 0, $month, 10));
 
@@ -95,7 +99,7 @@ class BarangMasukController extends Controller
         $total = DB::select('SELECT SUM(total) AS total_semua
         FROM (SELECT produk_id, SUM(dbm.jumlah*harga) AS total
         FROM barang_masuk AS bm, detail_barang_masuk AS dbm
-        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bm.invoice_id = dbm.invoice_id
+        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bm.invoice_id = dbm.invoice_id 
         GROUP BY dbm.produk_id) a
         ');
         return view('Barang_Masuk.preview_detail_pdf', compact('monthName','res','total','month'));
@@ -119,7 +123,7 @@ class BarangMasukController extends Controller
         $total = DB::select('SELECT SUM(total) AS total_semua
         FROM (SELECT produk_id, SUM(dbm.jumlah*harga) AS total
         FROM barang_masuk AS bm, detail_barang_masuk AS dbm
-        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bm.invoice_id = dbm.invoice_id
+        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bm.invoice_id = dbm.invoice_id 
         GROUP BY dbm.produk_id) a
         ');
         // dd($res,$total);
@@ -150,14 +154,12 @@ class BarangMasukController extends Controller
         WHERE EXTRACT(YEAR FROM tanggal) = '.$year.' AND bm.invoice_id = dbm.invoice_id AND dbm.produk_id = p.produk_id
         GROUP BY dbm.produk_id
         ');
-        // dd($res);
         $total = DB::select('SELECT SUM(total) AS total_semua
         FROM (SELECT produk_id, SUM(dbm.jumlah*harga) AS total
         FROM barang_masuk AS bm, detail_barang_masuk AS dbm
         WHERE EXTRACT(YEAR FROM tanggal) = '.$year.' AND bm.invoice_id = dbm.invoice_id
         GROUP BY dbm.produk_id) a
         ');
-        // dd($res,$total);
        
         return view('Barang_Masuk.preview_detail_tahun_pdf', compact('year','res','total'));
       

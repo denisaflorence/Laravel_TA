@@ -54,25 +54,17 @@
                     @foreach($detail as $d)
                     <div class="col-md-12 row" style="margin-top:10px;">
                         <div class="col-md-3">
-                            <!-- <label for="fullName" class='font-weight-bold'>Nama Produk </label> -->
                             <input type="text" class="form-control" id="fullName" value="{{$d->produk->nama_produk}}"
                                 readonly>
-                            <!-- <input type="text" class="form-control" id="fullName" value="Minyak Tanamu Tanami" readonly> -->
                         </div>
                         <div class="col-md-3">
-                            <!-- <label for="fullName" class='font-weight-bold'>Jumlah</label> -->
                             <input type="text" class="form-control" id="fullName" value="{{$d->jumlah}}" readonly>
-                            <!-- <input type="text" class="form-control" id="fullName" value="10" readonly> -->
                         </div>
                         <div class="col-md-3">
-                            <!-- <label for="eMail" class='font-weight-bold'>Harga Satuan</label> -->
-                            <input type="text" class="form-control" value="{{$d->harga_satuan}}" readonly>
-                            <!-- <input type="text" class="form-control" value="325000" readonly> -->
+                            <input type="text" class="form-control" value="@currency($d->harga_satuan)" readonly>
                         </div>
                         <div class="col-md-3">
-                            <!-- <label for="eMail" class='font-weight-bold'>Harga Total</label> -->
-                            <input type="text" class="form-control" value="{{($d->jumlah)*($d->harga_satuan)}}" readonly>
-                            <!-- <input type="text" class="form-control" value="3250000" readonly> -->
+                            <input type="text" class="form-control" value="@currency(($d->jumlah)*($d->harga_satuan))" readonly>
                         </div>
 
                     </div>

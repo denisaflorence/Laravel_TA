@@ -18,7 +18,7 @@
                                 <tr class="1">
                                     <th scope="col">ID Stock Opname </th>
                                     <th scope="col">Tanggal</th>
-                                    <th scope="col">Nama Admin</th>
+                                    <!-- <th scope="col">Nama Admin</th> -->
                                     <th scope="col">Nama Produk</th>
                                     <th scope="col">Satuan</th>
                                     <th scope="col">Jumlah di Sistem</th>
@@ -57,10 +57,10 @@
           data: 'tanggal',
           name: 'tanggal'
         },
-        {
-          data: 'nama_admin',
-          name: 'nama_admin'
-        },
+        // {
+        //   data: 'nama_admin',
+        //   name: 'nama_admin'
+        // },
         {
           data: 'nama_produk',
           name: 'nama_produk'

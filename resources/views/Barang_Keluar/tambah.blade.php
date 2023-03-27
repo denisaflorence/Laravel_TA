@@ -53,25 +53,25 @@
 
                 <div class="row ml-2">
                     <div class="col-md-12 row">
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label for="fullName" class='font-weight-bold'>Nama Produk</label>
                         </div>
-                        <div class="col-md-2" style="margin-left:40px">
+                        <div class="col-md-2">
                             <label for="fullName" class='font-weight-bold'>Jumlah Per Produk </label>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <label for="eMail" class='font-weight-bold'>Harga Satuan</label>
                         </div>
                         <!-- <div class="col-md-2">
                             <label for="eMail" class='font-weight-bold'>Tanggal Pelunasan</label>
                         </div> -->
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="eMail" class='font-weight-bold'>Subtotal</label>
                         </div>
                     </div>
                     <div id="wrapNota">
                         <div class="col-md-12 row row-nota">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <select class="form-control mt-2 ab-t-rpt-2" name="produk_id[]" >
                                     <option value="">--Nama Produk--</option>
                                     @foreach($produk as $items)
@@ -79,16 +79,16 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <input type="text" class="form-control mt-2" name="jumlah[]">
                                 <!-- JUMLAH KUTUSNYA BELOM ADA IF -->
 
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <select class="form-control mt-2 ab-t-rpt-2" name="harga_satuan[]" readonly>
                                     <option value="" readonly>--Harga Produk--</option>
                                     @foreach($produk as $items)
-                                    <option readonly value="{{ $items->harga_jual }}">{{ $items->harga_jual }} </option>
+                                    <option readonly value="{{ $items->harga_jual }}"> @currency($items->harga_jual)  </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -128,7 +128,7 @@
 
 <div id="templateNota" class="d-none">
     <div class="col-md-12 row row-nota">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <select class="form-control mt-2 ab-t-rpt-2" name="produk_id[]" >
                 <option value="">--Nama Produk--</option>
                 @foreach($produk as $items)
@@ -147,15 +147,15 @@
                 @endforeach
             </select>
         </div>
-
+<!-- 
         <div class="col-md-2">
             <input type="text" class="form-control mt-2" name="harga_diskon[]" readonly>
-        </div>
-        <div class="col-md-2">
+        </div> -->
+        <div class="col-md-3">
             <input type="text" class="form-control mt-2" name="total_harga_penjualan[]" readonly>
         </div>
-        <div class="col-md-1" style=" margin-top:6px; margin-left:-9px;">
-            <a class="btn btn-danger btn-sm btn-delete-row " style="margin-top: 2px;padding: 0.14rem 0.35rem;"><i class="far fa-2x fa-trash-alt" style="color: white;margin-top: 2px;"></i></a>
+        <div class="col-sm-1">
+            <a class="btn btn-danger btn-sm btn-delete-row " style="margin-top: 2px;"><i class="far fa-2x fa-trash-alt" style="color: white;"></i></a>
         </div>
     </div>
 </div>
