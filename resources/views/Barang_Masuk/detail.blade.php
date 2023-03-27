@@ -213,11 +213,11 @@
                         <thead>
                             <tr>
                                 <!-- <th>#</th> -->
-                                <th class="text-center"><h5>Nama produk</h5></th>
+                                <th class="text-left"><h5>Nama produk</h5></th>
                                 <th class="text-center"><h5>Harga satuan</h5></th>
                                 <th class="text-center"><h5>Jumlah</h5></th>
                                 <th class="text-center"><h5>Satuan</h5></th>
-                                <th class="text-center"><h5>Subtotal</h5></th>
+                                <th class="text-right"><h5>Subtotal</h5></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -229,7 +229,7 @@
                                       {{$d->produk->nama_produk}}
                                       </h3>
                                   </td>
-                                  <td class="unit">@currency($d->harga)</td>
+                                  <td class="unit" style="text-align:center;">@currency($d->harga)</td>
                                   <td class="qty" style="text-align:center;">{{$d->jumlah}}</td>
                                   <td style="text-align:center;">pcs</td>
                                   <td class="total">@currency(($d->jumlah)*($d->harga))</td>

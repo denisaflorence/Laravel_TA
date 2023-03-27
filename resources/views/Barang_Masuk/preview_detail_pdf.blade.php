@@ -205,10 +205,10 @@
                           <thead>
                               <tr>
                                   <!-- <th>#</th> -->
-                                  <th class="text-center"><h5>Nama produk</h5></th>
+                                  <th class="text-left"><h5>Nama produk</h5></th>
                                   <th class="text-center"><h5>Jumlah</h5></th>
                                   <th class="text-center"><h5>Satuan</h5></th>
-                                  <th class="text-center"><h5>Total Harga</h5></th>
+                                  <th class="text-right"><h5>Total Harga</h5></th>
                                   
                               </tr>
                           </thead>

@@ -191,7 +191,6 @@
                                 <div class = "text-center"><h2>Kutus - Kutus</h2></div>
                                 <div class = "text-center">Jl. Buana Kubu No.48, Tegal Harum, Bali</div>
                                 <div>081805554911</div>
-                                <!-- <div>company@example.com</div> -->
                             </div>
                         </div>
                     </header>
@@ -213,23 +212,23 @@
                             <thead>
                                 <tr>
                                     <!-- <th>#</th> -->
+                                    <th class="text-left"><h5>Nama produk</h5></th>
                                     <th class="text-center"><h5>Jumlah</h5></th>
-                                    <th class="text-center"><h5>Nama produk</h5></th>
                                     <th class="text-center"><h5>Harga satuan</h5></th>
-                                    <th class="text-center"><h5>Subtotal</h5></th>
+                                    <th class="text-right"><h5>Subtotal</h5></th>
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach($det as $d)
                                 <tr>
-                                    <!-- <td class="no">01</td> -->
-                                    <td class="qty" style="text-align:center;">{{$d->jumlah}} pcs</td>
                                     <td class="text-left">
                                         <h3>
                                             {{$d->produk->nama_produk}}
                                         </h3>
                                     </td>
-                                    <td class="unit">@currency($d->harga_satuan)</td>
+                                    <td class="qty" style="text-align:center;">{{$d->jumlah}} pcs</td>
+                                    
+                                    <td class="unit" style="text-align:center;">@currency($d->harga_satuan)</td>
                                     <td class="total">@currency(($d->jumlah)*($d->harga_satuan))</td>
                                 </tr>
                             @endforeach 

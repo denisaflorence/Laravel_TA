@@ -85,11 +85,10 @@
 
                             </div>
                             <div class="col-md-3">
-                                <!-- <input type="text" class="form-control" value=""  id="harga_produk"  readonly> -->
                                 <select class="form-control mt-2 ab-t-rpt-2" name="harga_satuan[]" readonly>
-                                    <option value="">--Harga Produk--</option>
+                                    <option value="" readonly>--Harga Produk--</option>
                                     @foreach($produk as $items)
-                                    <option value="{{ $items->harga_jual }}">{{ $items->harga_jual }}</option>
+                                    <option readonly value="{{ $items->harga_jual }}">{{ $items->harga_jual }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -206,19 +205,11 @@
 
         pointerHargaDiskon = $(this).closest('.row-nota')
             .find('[name^="harga_diskon"]');
-
-        // nanti diubah soalnya indexnya turun kalau ditambah option "--Nama Produk--"
-        //document.getElementById("harga_produk").selectedIndex = document.getElementById("produk").selectedIndex;
-
-        
-
         calculateValue(gradeId, produkId);
         
 
     });
 
-
-    // INI ONKEYUPNYA BISA DI PRODUK_ID DAN JUMLAH
     $(document).on('keyup', '[name^="jumlah"]', function () {
         $(this).closest('.row-nota')
             .find('[name^="total_harga_penjualan"]')
