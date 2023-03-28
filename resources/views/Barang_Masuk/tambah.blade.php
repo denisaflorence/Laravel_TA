@@ -69,26 +69,23 @@
                             <div class="col-md-2" >
                                 <input type="text" class="form-control mt-2" name="jumlah[]">
                             </div>
+                           
                             <div class="col-md-3" >
-                                <div class="form-control mt-2 d-flex align-items-center">
+                            <div class="form-control mt-2 d-flex align-items-center">
                                     <span>Rp</span>
-                                    <input type="text" class="price-input-number mx-2 w-100 border-0" name="harga_satuan[]">
+                                    <input type="text" class="price-input-number mx-2 w-100 border-0" name="harga_satuan_jadi[]">
                                     <span>,00</span>
                                 </div>
-                                {{-- <select class="form-control mt-2 ab-t-rpt-2" name="harga_satuan[]" >
+                                <!-- <select class="form-control mt-2 ab-t-rpt-2" name="harga_satuan[]" readonly>
                                     <option value="">--Harga Produk--</option>
                                     @foreach($produk as $items)
                                     <option value="{{ $items->harga_jual }}">{{ $items->harga_jual }}</option>
                                     @endforeach
-                                </select> --}}
+                                </select> -->
                             </div>
+
                             <div class="col-md-3  mb-3" >
-                                <div class="form-control mt-2 d-flex align-items-center">
-                                    <span>Rp</span>
-                                    <input type="text" class="mx-2 w-100 border-0 price-input-number-total" name="total_harga_pembelian[]">
-                                    <span>,00</span>
-                                </div>
-                                {{-- <input type="text" class="form-control mt-2" name="total_harga_pembelian[]" > --}}
+                                <input type="text" class="form-control mt-2" name="total_harga_pembelian[]" readonly>
                             </div>
                         </div>
                     </div>
@@ -99,22 +96,17 @@
                    <button type="submit" id="submit" class="btn btn-primary btn-lg" >Tambah</button> -->
                </div>
                 <!-- <div class="btn text-center" style="margin-top:50px;margin-left:60px;">
-
+                         
                 </div> -->
-
+                
 
                 <div class="col align-self-end">
                     <div class="col-md-3 offset-md-8 ">
                         <label for="eMail" class='font-weight-bold'>Total Harga</label>
                     </div>
                     <div class="col align-self-end  ">
-                        <div class="col-md-3 offset-md-8">
-                            <div class="form-control mt-2 d-flex align-items-center">
-                                <span>Rp</span>
-                                <input type="text" class="mx-2 w-100 border-0 price-input-number-total-seluruh" id="total_seluruh"  name="total_seluruh">
-                                <span>,00</span>
-                            </div>
-                            {{-- <input  class="form-control" type="text" id="total_seluruh" name="total_seluruh"> --}}
+                        <div class="col-md-3 offset-md-8"> 
+                            <input  class="form-control" type="text" id="total_seluruh" name="total_seluruh" readonly>
                         </div>
                     </div>
                 </div>
@@ -148,25 +140,15 @@
                 <input type="text" class="form-control mt-2" name="jumlah[]">
             </div>
             <div class="col-md-3">
-                <div class="form-control mt-2 d-flex align-items-center">
-                    <span>Rp</span>
-                    <input id="price-input-number" type="text" class="mx-2 w-100 border-0" name="harga_satuan[]">
-                    <span>,00</span>
-                </div>
-                {{-- <select class="form-control mt-2 ab-t-rpt-2" name="harga_satuan[]" readonly>
-                    <option value="">--Harga Produk--</option>
+                <select  name="harga_satuan[]" disabled>
+                    <option  value="">--Harga Produk--</option>
                     @foreach($produk as $items)
                     <option value="{{ $items->harga_jual }}">{{$items->harga_jual}}</option>
                     @endforeach
-                </select> --}}
+                </select>
             </div>
             <div class="col-md-3  mb-3">
-                <div class="form-control mt-2 d-flex align-items-center">
-                    <span>Rp</span>
-                    <input id="price-input-number" type="text" class="mx-2 w-100 border-0 price-input-number-total" name="total_harga_pembelian[]">
-                    <span>,00</span>
-                </div>
-                {{-- <input type="text" id="price-input-number" class="form-control mt-2" name="total_harga_pembelian[]" > --}}
+                <input type="text" class="form-control mt-2" name="total_harga_pembelian[]" readonly>
             </div>
                 <div class="col-md-1">
                     <a class="btn btn-danger btn-sm btn-delete-row " style="    height: 40px;width: 35px;
@@ -174,18 +156,12 @@
                 </div>
         </div>
     </div>
-
+    
     <script>
         var produkId,
         pointerHargaProduk;
+    
 
-    $(document).on('change', '.price-input-number', function() {
-        let value = parseInt($(this).val())
-        value = value.toLocaleString('en', { minimumFractionDigits: 0 });
-        $(this).val(value.replace(/,/g, '.'))
-
-        findTotal();
-    })
 
 
     $(document).on('change', '[name^="produk_id"]', function () {
@@ -204,22 +180,16 @@
             .val();
 
         if (jumlah)
-            total = jumlah * pointerHargaProduk.val().replace(/\./g, "")
-            total = total.toLocaleString('en', { minimumFractionDigits: 0 });
-            total = total.replace(/,/g, '.');
             $(this).closest('.row-nota')
                 .find('[name^="total_harga_pembelian"]')
-                .val(total)
+                .val(jumlah * pointerHargaProduk.val()  );
     });
 
     $(document).on('keyup', '[name^="jumlah"]', function () {
-        total = this.value * pointerHargaProduk.val().replace(/\./g, "")
-        total = total.toLocaleString('en', { minimumFractionDigits: 0 });
-        total = total.replace(/,/g, '.');
         $(this).closest('.row-nota')
                 .find('[name^="total_harga_pembelian"]')
-                .val(total);
-
+                .val(this.value * pointerHargaProduk.val()  );
+        
         findTotal();
     })
 
@@ -233,16 +203,16 @@
     })
 
     function findTotal(){
-        var arr = $("input[name='total_harga_pembelian[]']").map(function(){
-                    return $(this).val().replace(/\./g, "");
-                }).get();
+        var arr = $("input[name='total_harga_pembelian[]']")
+              .map(function(){return $(this).val();}).get();
+        // console.log(arr);
         // arr = parseInt(arr);
         var total =0;
         for(var i = 0, len = arr.length; i < len; i++){
             total += arr[i] << 0;
         }
-        total = total.toLocaleString('en', { minimumFractionDigits: 0 });
-        total = total.replace(/,/g, '.');
+        
+        console.log(total);
         document.getElementById('total_seluruh').value = total;
     }
     </script>

@@ -108,7 +108,7 @@ $(document).on('change', '[name^="produk"]', function () {
     
 $(document).on('keyup', '[name="jumlah_hitung"]', function () {
     $(this).closest('.row-nota').find('[name^="perbedaan"]')
-    .val(jumlahSistem - this.value);
+    .val(this.value - jumlahSistem);
     console.log(jumlahSistem);
 })
 

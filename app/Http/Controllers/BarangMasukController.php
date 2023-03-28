@@ -39,7 +39,8 @@ class BarangMasukController extends Controller
         $total = (int)str_replace('.', '', $_POST['total_seluruh']);
         $produk_id = $_POST['produk_id'];
         $jumlah = $_POST['jumlah'];
-        $harga_satuan = $_POST['harga_satuan'];
+        // $harga_satuan = $_POST['harga_satuan'];
+        $harga_satuan = $_POST['harga_satuan_jadi'];
 
         // INSERT BARANG MASUK
         $insert = DB::select(DB::raw("CALL insert_barangmasuk(:id_invo, :tanggal, :total, :admin_id)"),[
@@ -55,7 +56,7 @@ class BarangMasukController extends Controller
                 ':id_invo' => $invoice_id,
                 ':id_prod' => $produk_id,
                 ':jum' => $data['jumlah'][$index],
-                ':harga' => (int)str_replace('.', '', $data['harga_satuan'][$index])
+                ':harga' => (int)str_replace('.', '', $data['harga_satuan_jadi'][$index])
             ]);
         }
         return redirect('/barangmasuk');

@@ -88,7 +88,7 @@ class BarangKeluarController extends Controller
         // INSERT PERTAMA KE BARANG KELUAR
          $insert = DB::select(DB::raw("CALL insert_barangkeluar(:id_nota, :id_admin, :tanggal, :id_res, :total,  :jum_kut)"),[
             ':id_nota' => $nota_id,
-            ':id_admin' => Session::get('login'),
+            ':id_admin' => 'owner',
             ':tanggal' => $tanggal,
             ':id_res' => $reseller_id,
             ':total' => $total,

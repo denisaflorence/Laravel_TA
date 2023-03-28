@@ -22,23 +22,35 @@ use Yajra\DataTables\Facades\DataTables as DataTables;
 class AwalController extends Controller
 {
     public function home(){
-        $results = Produk::select('*',
-        DB::raw('(CASE 
-            WHEN jumlah_stok <= "200" THEN "Stok Menipis"
-            WHEN jumlah_stok = "0" THEN "Tidak Tersedia"
-            ELSE "Tersedia" 
-            END) AS status'))
-            ->get();
+        // $results = Produk::select('*',
+        // DB::raw('(CASE 
+        //     WHEN jumlah_stok <= "200" THEN "Stok Menipis"
+        //     WHEN jumlah_stok = "0" THEN "Tidak Tersedia"
+        //     ELSE "Tersedia" 
+        //     END) AS status'))
+        //     ->get();
+        
+        $results = DB::table('Produk')
+        ->select(DB::raw('nama_produk, jumlah_stok, (CASE
+                                                    WHEN jumlah_stok = "0" THEN "Tidak Tersedia" 
+                                                    WHEN jumlah_stok <= "200" THEN "Stok Menipis"
+                                                    
+                                                    ELSE "Tersedia" 
+                                                    END) AS status'))
+        -> where('jumlah_stok', '<=', 200)
+        ->orderby('jumlah_stok','asc')
+        ->get();
 
-            // $results = Produk::select('* 
-            // WHERE jumlah_stok <= 200',
-            // DB::raw('(CASE 
-            //     WHEN jumlah_stok <= "200" THEN "Stok Menipis"
-            //     WHEN jumlah_stok = "0" THEN "Tidak Tersedia"
-            //     ELSE "Tersedia" 
-            //     END) AS status'))
-            //     ->get();
-       
+        // $results = Produk::query()
+        // ->Select(
+        // DB::raw('nama_produk, jumlah_stok
+        // WHERE jumlah_stok<=200(CASE 
+        // WHEN jumlah_stok <= "200" THEN "Stok Menipis"
+        // WHEN jumlah_stok = "0" THEN "Tidak Tersedia"
+        // ELSE "Tersedia" 
+        // END) AS status'))
+        // ->get();
+        
         $exit = DB::select('SELECT  r.reseller_id,r.nama_reseller, p.nama_produk, (bk.belum_dibayar) AS total, bk.tanggal_pelunasan
         FROM barang_keluar AS bk, detail_barang_keluar AS dbk, reseller r, produk p
         WHERE bk.belum_dibayar>0 AND r.reseller_id = bk.reseller_id
@@ -49,13 +61,12 @@ class AwalController extends Controller
 
 
     public function incoming(){
-        // echo "Halo Kamu ngakses Controller Awal pada function index";
-
-        return view('barangmasuk');
-        // $incoming = BarangMasuk::all('invoice_id', 'total_harga', 'tanggal');
-        // dd($incoming);
+        $data = Db::select('SELECT * 
+        FROM barang_masuk 
+        WHERE status_del = 1');
+        return view('barangmasuk', compact('data'));
     }
-    // DATATABLE
+
     public function json(){
         $incoming = BarangMasuk::query('invoice_id', 'total_harga', 'tanggal');
         // dd($results);

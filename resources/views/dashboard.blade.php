@@ -13,13 +13,13 @@
                             <h2>Status Ketersediaan Produk</h2>
                             <tr class="1"> 
                                 <th scope="col">Nama Produk</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Jumlah Stok</th>
+                                <th scope="col" >Status</th>
+                                <th scope="col" style="text-align:right;">Jumlah Stok</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($results as $item)
-                            <tr class="4" style="background-color: #DAC1AE">
+                            <tr class="4" style="background-color: #DAC1AE;">
                                 <td>{{$item->nama_produk}}</td>
                                 @if($item->status == 'Tidak Tersedia')
                                 <td class="bg-danger">{{$item->status}}</td>
