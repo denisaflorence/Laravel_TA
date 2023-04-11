@@ -267,6 +267,13 @@
                             <option value="11">November</option>
                             <option value="12">Desember</option>
                         </select>
+                        <h2 > Pilih Tahun</h2>
+                    <select class="form-control mt-2 ab-t-rpt-4" style="height: 40px;
+                    width: 120px; font-size:18px;" name="year">
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
                         <button type="submit" id="signUp" class="ghost" style="margin-top: 15px;">Pilih</button>
                     </div>
                 </div>

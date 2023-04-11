@@ -190,18 +190,16 @@
                         <div class = "text-center"><h2>Kutus - Kutus</h2></div>
                             <div class = "text-center">Jl. Buana Kubu No.48, Tegal Harum, Bali</div>
                             <div>081805554911</div>
-                            <!-- <div>support@kutuskutusherbal.co.id</div> -->
                         </div>
                     </div>
                 </header>
                 <main>
                     <div class="container">
-                      <div class = "text-center"><center><h2>Laporan Pemesanan Bulan {{$monthName}}</h2></center></div>
+                      <div class = "text-center"><center><h2>Laporan Pemesanan Bulan {{$monthName}} Tahun {{$year}}</h2></center></div>
                     </div>
                     <table  cellspacing="0" cellpadding="0">
                         <thead>
                             <tr>
-                                <!-- <th>#</th> -->
                                 <th class="text-left" style="width:40%">Nama produk</th>
                                 <th class="text-right" style="width:20%">Jumlah</th>
                                 <th class="text-center" style="width:10%">Satuan</th>
@@ -212,16 +210,12 @@
                         <tbody>
                             @foreach($res as $d)
                               <tr>
-                                  <!-- <td class="no">01</td> -->
                                   <td class="text-left">
-                                      
                                       {{$d->nama_produk}}
-                                      
                                   </td>
                                   <td style="text-align:center;">{{$d->jumlah}}</td>
                                   <td style="text-align:center;">pcs</td>
                                   <td style="text-align:right;" name="total_harga_pembelian[]">@currency($d->total)</td>
-                             
                               </tr>
                             @endforeach 
                             

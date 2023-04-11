@@ -195,7 +195,7 @@
                 </header>
                 <main>
                 <div class="container">
-                      <div class = "text-center"><center><h2>Laporan Penjualan Bulan {{$monthName}}</h2></center></div>
+                      <div class = "text-center"><center><h2>Laporan Penjualan Bulan {{$monthName}} Tahun {{$year}}</h2></center></div>
                 </div>
                     <table  cellspacing="0" cellpadding="0">
                         <thead>

@@ -40,7 +40,7 @@ class BarangMasukController extends Controller
         $produk_id = $_POST['produk_id'];
         $jumlah = $_POST['jumlah'];
         // $harga_satuan = $_POST['harga_satuan'];
-        $harga_satuan = $_POST['harga_satuan_jadi'];
+        $harga_satuan = $_POST['harga_satuan'];
 
         // INSERT BARANG MASUK
         $insert = DB::select(DB::raw("CALL insert_barangmasuk(:id_invo, :tanggal, :total, :admin_id)"),[
@@ -56,7 +56,7 @@ class BarangMasukController extends Controller
                 ':id_invo' => $invoice_id,
                 ':id_prod' => $produk_id,
                 ':jum' => $data['jumlah'][$index],
-                ':harga' => (int)str_replace('.', '', $data['harga_satuan_jadi'][$index])
+                ':harga' => (int)str_replace('.', '', $data['harga_satuan'][$index])
             ]);
         }
         return redirect('/barangmasuk');
@@ -84,53 +84,47 @@ class BarangMasukController extends Controller
 
     public function preview_laporan_bulan(Request $request) {
         setlocale(LC_TIME, 'IND');  // or setlocale(LC_TIME, 'id_ID');
-        // $tahun = DB::select('SELECT EXTRACT(YEAR FROM tanggal) AS year
-        // FROM barang_masuk
-        // GROUP BY year
-        // ');
-        // $year = $_POST['year'];
+        $year = $_POST['year'];
         $month = $_POST['month'];
         $monthName = date("F", mktime(0, 0, 0, $month, 10));
 
         $res = DB::select('SELECT p.nama_produk, SUM(dbm.jumlah*harga) AS total, SUM(dbm.jumlah) AS jumlah
         FROM barang_masuk AS bm, detail_barang_masuk AS dbm, produk AS p
-        WHERE EXTRACT(MONTH FROM tanggal) ='.$month.' AND bm.invoice_id = dbm.invoice_id AND dbm.produk_id = p.produk_id
-        GROUP BY dbm.produk_id');
+        WHERE EXTRACT(MONTH FROM tanggal) ='.$month.' AND EXTRACT(YEAR FROM tanggal) = '.$year.'  AND bm.invoice_id = dbm.invoice_id AND dbm.produk_id = p.produk_id
+        GROUP BY dbm.produk_id
+        ORDER BY total ');
 
         $total = DB::select('SELECT SUM(total) AS total_semua
         FROM (SELECT produk_id, SUM(dbm.jumlah*harga) AS total
         FROM barang_masuk AS bm, detail_barang_masuk AS dbm
-        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bm.invoice_id = dbm.invoice_id 
+        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND EXTRACT(YEAR FROM tanggal) = '.$year.'  AND bm.invoice_id = dbm.invoice_id 
         GROUP BY dbm.produk_id) a
         ');
-        return view('Barang_Masuk.preview_detail_pdf', compact('monthName','res','total','month'));
-
-
+        return view('Barang_Masuk.preview_detail_pdf', compact('monthName','res','year','total','month'));
     }
 
     public function laporan_bulan(Request $request) {
         $month = $_POST['month'];
-        // dd($month);
+        $year = $_POST['year'];
 
         $monthName = date("F", mktime(0, 0, 0, $month, 10));
-        
-        // dd($monthName);
 
         $res = DB::select('SELECT p.nama_produk, SUM(dbm.jumlah*harga) AS total, SUM(dbm.jumlah) AS jumlah
         FROM barang_masuk AS bm, detail_barang_masuk AS dbm, produk AS p
-        WHERE EXTRACT(MONTH FROM tanggal) ='.$month.' AND bm.invoice_id = dbm.invoice_id AND dbm.produk_id = p.produk_id
-        GROUP BY dbm.produk_id');
+        WHERE EXTRACT(MONTH FROM tanggal) ='.$month.' AND EXTRACT(YEAR FROM tanggal) = '.$year.' AND bm.invoice_id = dbm.invoice_id AND dbm.produk_id = p.produk_id
+        GROUP BY dbm.produk_id
+        ORDER BY total ');
 
         $total = DB::select('SELECT SUM(total) AS total_semua
         FROM (SELECT produk_id, SUM(dbm.jumlah*harga) AS total
         FROM barang_masuk AS bm, detail_barang_masuk AS dbm
-        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND bm.invoice_id = dbm.invoice_id 
+        WHERE EXTRACT(MONTH FROM tanggal) = '.$month.' AND EXTRACT(YEAR FROM tanggal) = '.$year.' AND bm.invoice_id = dbm.invoice_id 
         GROUP BY dbm.produk_id) a
         ');
         // dd($res,$total);
        
         ini_set('max_execution_time', 300);
-        $pdf = PDF::loadview('Barang_Masuk.detail_pdf', compact('res','total','monthName') );
+        $pdf = PDF::loadview('Barang_Masuk.detail_pdf', compact('res','year','total','monthName') );
         return $pdf->stream();
       
 

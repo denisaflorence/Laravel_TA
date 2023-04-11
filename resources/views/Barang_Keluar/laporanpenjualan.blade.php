@@ -245,9 +245,7 @@
                 </div> --}}
                 <div class="overlay-panel overlay-right">
                     <h3 > Laporan Penjualan Bulanan</h3>
-                    {{-- <img src="assets/img/logo.png" style="width: 50%; margin-bottom: 10%;"> --}}
                     <h2 style="margin-bottom: 5px"> Pilih Bulan</h2>
-                    <!-- <p>Silahkan membuat akun jika belum punya akun</p> -->
                     <select class="form-control mt-2 ab-t-rpt-4" style="height: 40px;
                     width: 120px; font-size:18px;" name="month">
                         <option value="1">Januari</option>
@@ -262,6 +260,13 @@
                         <option value="10">Oktober</option>
                         <option value="11">November</option>
                         <option value="12">Desember</option>
+                    </select>
+                    <h2 > Pilih Tahun</h2>
+                    <select class="form-control mt-2 ab-t-rpt-4" style="height: 40px;
+                    width: 120px; font-size:18px;" name="year">
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
                     </select>
                     <button type="submit" id="signUp" class="ghost"style="margin-top: 15px;">Pilih</button>
                 </div>

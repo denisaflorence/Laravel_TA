@@ -207,7 +207,7 @@
                 <div class="container">
                     <div class="text-center" style="margin-bottom:20px;">
                         <center>
-                            <h2>Laporan Penjualan Bulan {{$monthName}}</h2>
+                            <h2>Laporan Penjualan Bulan {{$monthName}} Tahun {{$year}}</h2>
                         </center>
                     </div>
                     <input type="hidden" name="month" value={{$month}}>
