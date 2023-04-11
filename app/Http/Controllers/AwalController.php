@@ -41,16 +41,6 @@ class AwalController extends Controller
         ->orderby('jumlah_stok','asc')
         ->get();
 
-        // $results = Produk::query()
-        // ->Select(
-        // DB::raw('nama_produk, jumlah_stok
-        // WHERE jumlah_stok<=200(CASE 
-        // WHEN jumlah_stok <= "200" THEN "Stok Menipis"
-        // WHEN jumlah_stok = "0" THEN "Tidak Tersedia"
-        // ELSE "Tersedia" 
-        // END) AS status'))
-        // ->get();
-        
         $exit = DB::select('SELECT  r.reseller_id,r.nama_reseller, p.nama_produk, (bk.belum_dibayar) AS total, bk.tanggal_pelunasan
         FROM barang_keluar AS bk, detail_barang_keluar AS dbk, reseller r, produk p
         WHERE bk.belum_dibayar>0 AND r.reseller_id = bk.reseller_id

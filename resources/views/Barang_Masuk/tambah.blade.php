@@ -88,7 +88,7 @@
                     </div>
                     <div class="col align-self-end  ">
                         <div class="col-md-3 offset-md-8"> 
-                        <input type="text" class="mx-2 w-100 border-0 prc" id="total_seluruh"  name="total_seluruh">
+                        <input type="text" class="mx-2 w-100 border-0 prc" id="total_seluruh"  name="total_seluruh" readonly>
                         </div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                 .find('[name^="total_harga_pembelian"]')
                 .val(jumlah * pointerHargaProduk.val()  );
     });
-    $(document).on('keyup', '[name^="jumlah"]', function () {
+    $(document).on('change', '[name^="jumlah"]', function () {
         $(this).closest('.row-nota')
                 .find('[name^="total_harga_pembelian"]')
                 .val(this.value * pointerHargaProduk.val()  );
@@ -175,7 +175,6 @@
         for(var i = 0, len = arr.length; i < len; i++){
             total += arr[i] << 0;
         }
-        
         console.log(total);
         document.getElementById('total_seluruh').value = total;
     }
