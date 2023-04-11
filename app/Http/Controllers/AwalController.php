@@ -64,7 +64,14 @@ class AwalController extends Controller
         $data = Db::select('SELECT * 
         FROM barang_masuk 
         WHERE status_del = 1');
-        return view('barangmasuk', compact('data'));
+
+        $produk = DB::select('SELECT invoice_id, tanggal, total_harga
+        FROM barang_masuk
+        WHERE status_del = 0
+        GROUP BY tanggal
+        ');
+        return view('barangmasuk', compact('produk'));
+        
     }
 
     public function json(){

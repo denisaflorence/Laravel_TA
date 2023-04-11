@@ -27,7 +27,11 @@ class BarangMasukController extends Controller
         
         $nota = DB::select('CALL ID_barangmasuk');
         $produk = Produk::all();
-        
+        // $produk = DB::select('SELECT invoice_id, tanggal, total_harga
+        // FROM produk
+        // WHERE status_del = 0
+        // GROUP BY tanggal
+        // ');
         return view('Barang_Masuk.tambah',compact('nota','produk'));
     }
 
