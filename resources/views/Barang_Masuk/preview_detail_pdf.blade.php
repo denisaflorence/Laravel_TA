@@ -175,9 +175,10 @@
   }
 }
 </style>
-    {{-- <div id="invoice">
-            <hr style="color: #B28E6B;">
-      </div> --}}
+      <div>
+          <!-- <span class="font-weight-bold">Tekan Tombol command + p untuk mencetak laporan</span> -->
+          <span class="badge badge-danger badge-counter">Tekan Tombol command + p untuk mencetak laporan</span>
+      </div>
       
         <div class="invoice overflow-auto">
             <div style="min-width: 600px">
@@ -237,7 +238,7 @@
                               </tr>
                           </tfoot>
                       </table>
-                      <button type="submit"class="btn btn-primary btn-lg" >Print Nota</button>
+                      <!-- <button type="submit"class="btn btn-primary btn-lg" >Print Nota</button> -->
                   </main>
               </form>
         </div>
