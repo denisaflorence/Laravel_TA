@@ -10,16 +10,15 @@
 
             <div class="col-md-12">
                 <div class="item-big-report col-md-12">
-                  <a class="btn btn-primary float-right" style="background-color:#C2A890" href="/reseller/add" role="button">+ Tambah Reseller</a>
+                  <a class="btn btn-primary float-right" style="background-color:#C2A890" href="/reseller/add" role="button">+ Tambah Pembeli</a>
 
 
                     <table class="table-wisata table-tiketsaya table " id ="reseller-table">
                         <thead>
                             <tr class="1">
-                                <th scope="col">Nama Reseller</th>
+                                <th scope="col">Nama Pembeli</th>
                                 <th scope="col">Alamat</th>
-                                <th scope="col">Jumlah Pembelian Minyak Kutus</th>
-                                <th scope="col">Tanggal Pembelian Minyak Kutus</th>
+                
                                 <th scope="col">Grade</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -53,14 +52,7 @@
           data: 'alamat',
           name: 'alamat'
         },
-        {
-          data: 'total_kutus',
-          name: 'total_kutus'
-        },
-        {
-          data: 'tanggal_kutus',
-          name: 'tanggal_kutus'
-        },
+      
         {
           data: 'jenis_grade',
           name: 'jenis_grade'

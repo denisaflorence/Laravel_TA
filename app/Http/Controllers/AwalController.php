@@ -21,15 +21,7 @@ use Yajra\DataTables\Facades\DataTables as DataTables;
 
 class AwalController extends Controller
 {
-    public function home(){
-        // $results = Produk::select('*',
-        // DB::raw('(CASE 
-        //     WHEN jumlah_stok <= "200" THEN "Stok Menipis"
-        //     WHEN jumlah_stok = "0" THEN "Tidak Tersedia"
-        //     ELSE "Tersedia" 
-        //     END) AS status'))
-        //     ->get();
-        
+    public function home(){        
         $results = DB::table('Produk')
         ->select(DB::raw('nama_produk, jumlah_stok, (CASE
                                                     WHEN jumlah_stok = "0" THEN "Tidak Tersedia" 
@@ -46,7 +38,6 @@ class AwalController extends Controller
         WHERE bk.belum_dibayar>0 AND r.reseller_id = bk.reseller_id
         GROUP BY bk.tanggal_pelunasan');
         return view('dashboard', compact('results','exit'));
-
     }
 
 

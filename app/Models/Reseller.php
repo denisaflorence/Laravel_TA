@@ -13,19 +13,16 @@ class Reseller extends Model
     protected $primaryKey = 'reseller_id';
     public $incrementing = false;
 
-    // In Laravel 6.0+ make sure to also set $keyType
     protected $keyType = 'string';
     protected $table = "reseller";
     protected $fillable = [
         "reseller_id",
         "nama_reseller",
         "alamat",
-        "total_kutus",
-        "tanggal_kutus",
         "grade_id",
-        "status_del"
+        "status_del",
     ];
-
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
     public function grade()
     {
     	return $this->belongsTo('App\Models\Grade', 'grade_id');

@@ -13,7 +13,6 @@ class Admin extends Model
     protected $primaryKey = 'admin_id';
     public $incrementing = false;
 
-    // In Laravel 6.0+ make sure to also set $keyType
     protected $keyType = 'string';
     protected $table = "admin";
     protected $fillable = [
@@ -32,17 +31,11 @@ class Admin extends Model
     ];
 
     public function isExist($data){
-        // ini yg bener
-        // $cmd = "SELECT count(*) is_exist ".
-        //         "FROM ".$this->tabel_terpilih." ".
-        //         "WHERE username=:username AND password=sha1(:password);";
-
         $cmd = "SELECT count(*) is_exist 
                 FROM admin 
                 WHERE admin_id=:username AND password=:password;";
 
         $res = DB::select($cmd,$data);
-        // dd($res);
         if($res[0]->is_exist == 1){
             return true;
         }

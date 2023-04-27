@@ -26,19 +26,14 @@ class ResellerController extends Controller
         ->select('*')
         ->groupBy('grade_id')
         ->get();
-        // dd($grade);
         return view('Reseller.tambah', compact('grade','reseller_id'));
     }
 
     public function insert_reseller(Request $request){
-        // $tanggal = Carbon::parse($request->tanggal)->toDateString();
-        $tanggal = Carbon::createFromFormat('d/m/Y', $request->tanggal)->toDateString();
         Reseller::create([
             'reseller_id'=>$request->input('reseller_id'),
             'nama_reseller'=>$request->input('nama_reseller'),
             'alamat'=>$request->input('alamat'),
-            'total_kutus'=>$request->input('total_kutus'),
-            'tanggal_kutus'=>$tanggal,
             'grade_id'=>$request->input('grade'),
             ]);
 
@@ -57,7 +52,6 @@ class ResellerController extends Controller
     }
 
     public function reseller_update(Request $request){
-        // dd($request->all());
         $id = $_POST['reseller_id'];
        
         Reseller::where('reseller_id',$id)->update([
@@ -74,8 +68,6 @@ class ResellerController extends Controller
     public function destroy_reseller($id)
     {
         Reseller::where('reseller_id',$id)->delete();
-      
-        // kalau pakai restore dibalikin
         return redirect('/reseller');
         
     }

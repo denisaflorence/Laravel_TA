@@ -6,7 +6,6 @@
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <div class="main-content">
         <div class="row report-group">
-            <!-- <div class="col-md-12"> -->
                 <div class="item-big-report col-md-12">
                     <table class="table-wisata table-tiketsaya table " id ="produk-table">
                         <thead>
@@ -22,7 +21,6 @@
                         </thead>
                     </table>
                 </div>
-            <!-- </div> -->
         </div>
 </div>
 <script>
