@@ -21,7 +21,7 @@
                             <tr class="1">
                                 <th scope="col">Nomor Nota</th>
                                 <th scope="col">Tanggal</th>
-                                <th scope="col">Nama Reseller</th>
+                                <th scope="col">Nama Pembeli</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </tr>

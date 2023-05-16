@@ -237,13 +237,6 @@
                             @endforeach 
                             
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                
-                                <td colspan="4">Total Harga</td>
-                                <td>@currency($incoming->total_harga)</td>
-                            </tr>
-                        </tfoot>
                     </table>
                 </main>
               <!-- <button type="submit"class="btn btn-primary btn-lg" >Print Nota</button> -->

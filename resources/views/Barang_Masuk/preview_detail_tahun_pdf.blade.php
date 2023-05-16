@@ -198,7 +198,7 @@
                   @csrf
                       <main>
                           <div class="container">
-                            <div class = "text-center" style="margin-bottom:20px;"><center><h2>Laporan Pemesanan Tahun {{$year}}</h2></center></div>
+                            <div class = "text-center" style="margin-bottom:20px;"><center><h2>Laporan Pembelian Tahun {{$year}}</h2></center></div>
                             <input type="hidden" name="year" value="{{$year}}">
                           </div>
                           <table  cellspacing="0" cellpadding="0">

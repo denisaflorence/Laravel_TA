@@ -38,7 +38,6 @@ class ResellerController extends Controller
             ]);
 
         return redirect('/reseller');
-
     }
 
 
@@ -61,7 +60,7 @@ class ResellerController extends Controller
 
         ]);
 
-        return redirect('/reseller/edit/'.$id);
+        return redirect('/reseller');
     }
 
     

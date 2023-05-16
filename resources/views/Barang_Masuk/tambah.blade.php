@@ -81,17 +81,6 @@
                     <button type="button" id="tambah_produk" class="btn btn-success btn-md mt-2 text-right ml-4">Tambah Produk</button>
                </div>
                 
-
-                <div class="col align-self-end">
-                    <div class="col-md-3 offset-md-8 ">
-                        <label for="eMail" class='font-weight-bold'>Total Harga</label>
-                    </div>
-                    <div class="col align-self-end  ">
-                        <div class="col-md-3 offset-md-8"> 
-                        <input type="text" class="mx-2 w-100 border-0 prc" id="total_seluruh"  name="total_seluruh" readonly>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="row gutters">
                 <div class="col align-self-end">
@@ -154,7 +143,7 @@
                 .find('[name^="total_harga_pembelian"]')
                 .val(jumlah * pointerHargaProduk.val()  );
     });
-    $(document).on('change', '[name^="jumlah"]', function () {
+    $(document).on('click', '[name^="jumlah"]', function () {
         $(this).closest('.row-nota')
                 .find('[name^="total_harga_pembelian"]')
                 .val(this.value * pointerHargaProduk.val()  );
@@ -178,6 +167,19 @@
         console.log(total);
         document.getElementById('total_seluruh').value = total;
     }
+    // function findTotal(){
+    //     var arr = $("input[name='total_harga_pembelian[]']").map(function(){
+    //                 return $(this).val().replace(/\./g, "");
+    //             }).get();
+    //     // arr = parseInt(arr);
+    //     var total =0;
+    //     for(var i = 0, len = arr.length; i < len; i++){
+    //         total += arr[i] << 0;
+    //     }
+    //     total = total.toLocaleString('en', { minimumFractionDigits: 0 });
+    //     total = total.replace(/,/g, '.');
+    //     document.getElementById('total_seluruh').value = total;
+    // }
     </script>
 
     <script type="text/javascript" src="js/jquery-3.5.1.js"></script>

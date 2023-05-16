@@ -248,7 +248,7 @@
                     <button class="ghost" id="signIn">MASUK</button>
                 </div> --}}
                     <div class="overlay-panel overlay-right">
-                        <h3> Laporan Pemesanan Bulanan</h3>
+                        <h3> Laporan Pembelian Bulanan</h3>
                         {{-- <img src="assets/img/logo.png" style="width: 50%; margin-bottom: 10%;"> --}}
                         <h2 style="margin-bottom: 5px"> Pilih Bulan</h2>
                         <!-- <p>Silahkan membuat akun jika belum punya akun</p> -->

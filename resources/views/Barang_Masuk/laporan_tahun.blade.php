@@ -231,7 +231,7 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
-                    <h3 > Laporan Pemesanan Tahunan</h3>
+                    <h3 > Laporan Pembelian Tahunan</h3>
                     {{-- <img src="assets/img/logo.png" style="width: 50%; margin-bottom: 10%;"> --}}
                    
                     <h2 style="margin-bottom: 5px"> Pilih Tahun</h2>

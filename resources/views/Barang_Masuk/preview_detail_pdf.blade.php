@@ -199,7 +199,7 @@
                 @csrf
                   <main>
                       <div class="container">
-                        <div class = "text-center" style="margin-bottom:20px;"><center><h2>Laporan Pemesanan Bulan {{$monthName}} Tahun {{$year}}</h2></center></div>
+                        <div class = "text-center" style="margin-bottom:20px;"><center><h2>Laporan Pembelian Bulan {{$monthName}} Tahun {{$year}}</h2></center></div>
                         <input type="hidden" name="month" value="{{$month}}">
                       </div>
                       <table  cellspacing="0" cellpadding="0">

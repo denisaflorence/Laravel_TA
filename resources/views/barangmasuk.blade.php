@@ -19,7 +19,7 @@
                             <tr class="1">
                                 <th scope="col">Nomor Invoice</th>
                                 <th scope="col">Tanggal</th>
-                                <th scope="col">Total Harga</th>
+                                <!-- <th scope="col">Total Harga</th> -->
                                 <th scope="col">Aksi</th>
                                 <!-- <th scope="col">Menu</th> -->
                             </tr>
@@ -56,11 +56,11 @@
           data: 'tanggal',
           name: 'tanggal'
         },
-        {
-          data: 'total_harga',
-          name: 'total_harga',
-          render: $.fn.dataTable.render.number( '.', '.', 0, 'Rp' )
-        },
+        // {
+        //   data: 'total_harga',
+        //   name: 'total_harga',
+        //   render: $.fn.dataTable.render.number( '.', '.', 0, 'Rp' )
+        // },
         // {
         //   data: 'satuan_id',
         //   name: 'satuan_id'

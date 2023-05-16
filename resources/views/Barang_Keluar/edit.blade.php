@@ -24,7 +24,7 @@
                    
             <div class="row gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h3 class="mb-2 text-primary" style="padding-bottom:20px;">Ubah Barang Keluar</h3>
+                    <h3 class="mb-2 text-primary" style="padding-bottom:20px;">Ubah Transaksi Penjualan</h3>
                 </div>
 
                 <div class="ini">

@@ -40,17 +40,17 @@ class BarangMasukController extends Controller
         $invoice_id = $_POST['invoice_id'];
         // $admin_id = Session::get('login');
         $tanggal = Carbon::createFromFormat('d/m/Y', $request->tanggal)->toDateString();
-        $total = (int)str_replace('.', '', $_POST['total_seluruh']);
+        // $total = (int)str_replace('.', '', $_POST['total_seluruh']);
         $produk_id = $_POST['produk_id'];
         $jumlah = $_POST['jumlah'];
         // $harga_satuan = $_POST['harga_satuan'];
         $harga_satuan = $_POST['harga_satuan'];
 
         // INSERT BARANG MASUK
-        $insert = DB::select(DB::raw("CALL insert_barangmasuk(:id_invo, :tanggal, :total, :admin_id)"),[
+        $insert = DB::select(DB::raw("CALL insert_barangmasuk(:id_invo, :tanggal, :admin_id)"),[
             ':id_invo' => $invoice_id,
             ':tanggal' => $tanggal,
-            ':total' => $total,
+            // ':total' => $total,
             ':admin_id' => 'owner',
         ]);
 
