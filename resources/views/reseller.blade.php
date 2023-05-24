@@ -18,7 +18,6 @@
                             <tr class="1">
                                 <th scope="col">Nama Pembeli</th>
                                 <th scope="col">Alamat</th>
-                
                                 <th scope="col">Grade</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -43,8 +42,8 @@
     $('#reseller-table').DataTable({
       processing: true,
       serverside: true,
-      order: 1,asc,
       ajax: 'reseller/reseller_json',
+      order: 1,asc,
       columns: [{
           data: 'nama_reseller',
           name: 'nama_reseller'
