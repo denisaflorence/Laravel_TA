@@ -49,6 +49,7 @@
       processing: true,
       serverside: true,
       ajax: 'stockopname/sopname_json',
+      order: [[3, 'asc']],
       columns: [{
           data: 'opname_id',
           name: 'opname_id'

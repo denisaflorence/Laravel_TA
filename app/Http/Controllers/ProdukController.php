@@ -12,6 +12,7 @@ use App\Models\DetailBarangMasuk;
 use App\Models\BarangKeluar;
 use App\Models\Reseller;
 use App\Models\StockOpname;
+use App\Models\LogHistory;
 use App\Models\Admin;
 use Carbon\Carbon;
 
@@ -35,6 +36,14 @@ class ProdukController extends Controller
             'harga_modal'=>$request->input('harga_modal'), 
             'harga_jual'=>$request->input('harga_jual')
         ]);
+
+        // foreach ($id['produk_id'] as $index => $id) {
+        //     LogHistory::create([
+        //         'harga_baru'=>$request->input('harga_jual'),
+        //         'tanggal'=>Carbon::createFromFormat('d/m/Y', $request->tanggal)->toDateString(),
+        //         ]);
+        // }
+
         return redirect('/produk');
     }
 }

@@ -43,6 +43,7 @@
     $('#reseller-table').DataTable({
       processing: true,
       serverside: true,
+      order: 1,asc,
       ajax: 'reseller/reseller_json',
       columns: [{
           data: 'nama_reseller',
